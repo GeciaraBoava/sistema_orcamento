@@ -1,7 +1,7 @@
-package com.geciara.orcamento.model;
+package com.geciara.orcamento.entitys;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.geciara.orcamento.model.types.AcessType;
+import com.geciara.orcamento.entitys.enums.AcessType;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;

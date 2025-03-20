@@ -1,6 +1,7 @@
 package com.geciara.orcamento.service;
 
-import com.geciara.orcamento.model.Material;
+import com.geciara.orcamento.entitys.Material;
+import com.geciara.orcamento.exceptions.MaterialNotFoundException;
 import com.geciara.orcamento.repository.MaterialRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,9 +19,9 @@ public class MaterialService {
 
     }
 
-    public Material findMaterialById(Long id) {
+    public Material findMaterialById(Long id) throws MaterialNotFoundException {
         return materialRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Material não encontrado com o ID: " + id));
+                .orElseThrow(() -> new MaterialNotFoundException("Material não encontrado com o ID: " + id));
     }
 
     public Material saveMaterial(Material material) {
@@ -32,9 +33,9 @@ public class MaterialService {
 
     }
 
-    public void updateMaterialPrice(Long id, Double newPrice) {
+    public void updateMaterialPrice(Long id, Double newPrice) throws MaterialNotFoundException {
         Material material = materialRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Material não encontrado"));
+                .orElseThrow(() -> new MaterialNotFoundException("Material não encontrado"));
 
         material.setPrice(newPrice);
         materialRepository.save(material);

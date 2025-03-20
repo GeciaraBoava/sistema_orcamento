@@ -1,9 +1,9 @@
-package com.geciara.orcamento.model.types;
+package com.geciara.orcamento.entitys.enums;
 
 public enum CustomerType {
-    PUBLICO ("Público"),
-    CORPORATIVO ("Corporativo"),
-    PARTICULAR ("Particular");
+    PUBLIC("Público"),
+    CORPORATIVE("Corporativo"),
+    PRIVATE("Particular");
 
     private final String name;
 

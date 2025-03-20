@@ -1,4 +1,4 @@
-package com.geciara.orcamento.model;
+package com.geciara.orcamento.entitys;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;

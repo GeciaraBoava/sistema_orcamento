@@ -1,4 +1,4 @@
-package com.geciara.orcamento.model;
+package com.geciara.orcamento.entitys;
 
 public class UnitMeasure {
     private long id;
