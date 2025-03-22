@@ -8,9 +8,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 @Service
-public class MaterialService extends BaseService<Material, Long>{
+public class MaterialService extends BaseServiceImpl<Material, MaterialRepository> {
 
     public MaterialService(MaterialRepository materialRepository) {
         super(materialRepository);
@@ -25,7 +26,7 @@ public class MaterialService extends BaseService<Material, Long>{
                 .orElseThrow(ItemNotFoundException::new);
 
         material.setPrice(newPrice);
-        repository.save(material);
+        material.setUpdateDate(LocalDateTime.now());
     }
 
 }

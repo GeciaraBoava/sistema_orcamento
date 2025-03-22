@@ -6,8 +6,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/materials")
@@ -42,7 +42,7 @@ public class MaterialController {
     }
 
     @PutMapping("/{id}/price")
-    public ResponseEntity<String> updatePriceMaterial(@PathVariable Long id, @RequestBody BigDecimal newPrice) {
+    public ResponseEntity<String> updatePriceMaterial(@PathVariable Long id, @RequestBody BigDecimal newPrice, LocalDateTime updateDate) {
 
         materialService.updateMaterialPrice(id, newPrice);
         return ResponseEntity.ok("Preço do insumo atualizado com sucesso");

@@ -60,6 +60,8 @@ public class Material {
 
     public void setCreationDate(LocalDateTime creationDate) { this.creationDate = creationDate; }
 
+    public void setUpdateDate(LocalDateTime updateDate) { this.updateDate = updateDate; }
+
     public BigDecimal getPrice() { return price; }
 
     public void setPrice(BigDecimal price) { this.price = price; }
