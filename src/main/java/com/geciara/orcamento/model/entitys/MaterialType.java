@@ -1,21 +1,26 @@
-package com.geciara.orcamento.entitys;
+package com.geciara.orcamento.model.entitys;
 
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "material_type")
 public class MaterialType {
-    private long id;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "material_type_seq")
+    @SequenceGenerator(name = "material_type_seq", sequenceName = "material_type_seq", allocationSize = 1)
+    private Long id;
     private String descricao;
     private boolean active;
 
     public MaterialType() {}
 
-    public MaterialType(long id, String descricao) {
-        this.id = id;
+    public MaterialType(String descricao) {
         this.descricao = descricao;
         this.active = true;
     }
 
-    public long getId() { return id; }
-
-    public void setId(Long id) { this.id = id; }
+    public Long getId() { return id; }
 
     public String getDescricao() { return descricao; }
 

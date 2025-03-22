@@ -1,4 +1,4 @@
-package com.geciara.orcamento.entitys.enums;
+package com.geciara.orcamento.model.enums;
 
 public enum BudgetStatus {
     SKETCH,

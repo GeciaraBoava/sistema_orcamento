@@ -1,44 +1,31 @@
-package com.geciara.orcamento.service;
+package com.geciara.orcamento.model.services;
 
-import com.geciara.orcamento.entitys.Material;
-import com.geciara.orcamento.exceptions.MaterialNotFoundException;
+import com.geciara.orcamento.model.entitys.Material;
+import com.geciara.orcamento.model.exceptions.InvalidPriceException;
+import com.geciara.orcamento.model.exceptions.ItemNotFoundException;
 import com.geciara.orcamento.repository.MaterialRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
+import java.math.BigDecimal;
 
 @Service
-public class MaterialService {
+public class MaterialService extends BaseService<Material, Long>{
 
-    @Autowired
-    private MaterialRepository materialRepository;
-
-    public List<Material> listAllMaterials() {
-        return materialRepository.findAll();
-
+    public MaterialService(MaterialRepository materialRepository) {
+        super(materialRepository);
     }
 
-    public Material findMaterialById(Long id) throws MaterialNotFoundException {
-        return materialRepository.findById(id)
-                .orElseThrow(() -> new MaterialNotFoundException("Material não encontrado com o ID: " + id));
-    }
+    @Transactional
+    public void updateMaterialPrice(Long id, BigDecimal newPrice) {
 
-    public Material saveMaterial(Material material) {
-        return materialRepository.save(material);
-    }
+        if (newPrice.signum() == -1) { throw new InvalidPriceException("O preço não pode ser negativo"); }
 
-    public void deleteMaterial(Long id) {
-        materialRepository.deleteById(id);
-
-    }
-
-    public void updateMaterialPrice(Long id, Double newPrice) throws MaterialNotFoundException {
-        Material material = materialRepository.findById(id)
-                .orElseThrow(() -> new MaterialNotFoundException("Material não encontrado"));
+        Material material = repository.findById(id)
+                .orElseThrow(ItemNotFoundException::new);
 
         material.setPrice(newPrice);
-        materialRepository.save(material);
+        repository.save(material);
     }
 
 }

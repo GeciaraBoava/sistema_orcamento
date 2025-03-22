@@ -1,22 +1,26 @@
-package com.geciara.orcamento.entitys;
+package com.geciara.orcamento.model.entitys;
 
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "unit_measure")
 public class UnitMeasure {
-    private long id;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "unit_measure_seq")
+    @SequenceGenerator(name = "unit_measure_seq", sequenceName = "unit_measure_seq", allocationSize = 1)
+    private Long id;
+
     private String descricao;
 
     public UnitMeasure() {}
 
-    public UnitMeasure(long id, String descricao) {
-        this.id = id;
+    public UnitMeasure(String descricao) {
         this.descricao = descricao;
     }
 
     public long getId() {
         return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getDescricao() {

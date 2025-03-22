@@ -1,7 +1,9 @@
-package com.geciara.orcamento.entitys;
+package com.geciara.orcamento.model.entitys;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
+
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Entity
@@ -9,7 +11,8 @@ import java.time.LocalDateTime;
 public class Material {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "material_seq")
+    @SequenceGenerator(name = "material_seq", sequenceName = "material_seq", allocationSize = 1)
     private Long id;
 
     private MaterialType type;
@@ -22,7 +25,7 @@ public class Material {
     @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDateTime updateDate;
 
-    private Double price;
+    private BigDecimal price;
     private boolean active;
 
     public Material() {}
@@ -30,7 +33,7 @@ public class Material {
     public Material(MaterialType type,
                     String description,
                     UnitMeasure unitMeasure,
-                    Double price) {
+                    BigDecimal price) {
         this.type = type;
         this.description = description;
         this.unitMeasure = unitMeasure;
@@ -40,8 +43,6 @@ public class Material {
     }
 
     public Long getId() { return id; }
-
-    public void setId(Long id) { this.id = id; }
 
     public MaterialType getType() { return type; }
 
@@ -59,9 +60,9 @@ public class Material {
 
     public void setCreationDate(LocalDateTime creationDate) { this.creationDate = creationDate; }
 
-    public Double getPrice() { return price; }
+    public BigDecimal getPrice() { return price; }
 
-    public void setPrice(Double price) { this.price = price; }
+    public void setPrice(BigDecimal price) { this.price = price; }
 
     public boolean getActive() {
         return active;

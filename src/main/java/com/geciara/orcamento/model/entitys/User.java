@@ -1,7 +1,7 @@
-package com.geciara.orcamento.entitys;
+package com.geciara.orcamento.model.entitys;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.geciara.orcamento.entitys.enums.AcessType;
+import com.geciara.orcamento.model.enums.AcessType;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
@@ -11,8 +11,9 @@ import java.time.LocalDateTime;
 public class User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "unit_measure_seq")
+    @SequenceGenerator(name = "unit_measure_seq", sequenceName = "unit_measure_seq", allocationSize = 1)
+    private Long id;
     private String name;
     private String email;
     private AcessType acessType;
@@ -27,8 +28,7 @@ public class User {
 
     public User() {}
 
-    public User(long id,
-                String name,
+    public User(String name,
                 String email,
                 AcessType acessType,
                 String password) {
@@ -41,8 +41,6 @@ public class User {
     }
 
     public Long getId() { return id; }
-
-    public void setId(Long id) { this.id = id; }
 
     public String getName() { return  name; }
 
