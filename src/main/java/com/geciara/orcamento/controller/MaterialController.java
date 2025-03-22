@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/materials")
@@ -20,24 +21,24 @@ public class MaterialController {
 
     @GetMapping
     public ResponseEntity<List<Material>> listAllMaterials() {
-        List<Material> materials = materialService.listAllMaterials();
+        List<Material> materials = materialService.listAll();
         return ResponseEntity.ok(materials);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<Material> findMaterialById(@PathVariable Long id) {
-        Material material = materialService.findMaterialById(id);
+        Material material = materialService.findById(id);
         return ResponseEntity.ok(material);
     }
 
     @PostMapping
     public Material saveMaterial(@RequestBody Material material) {
-        return materialService.saveMaterial(material);
+        return materialService.save(material);
     }
 
     @DeleteMapping("/{id}")
     public void deleteMaterial(@PathVariable Long id) {
-        materialService.deleteMaterial(id);
+        materialService.delete(id);
     }
 
     @PutMapping("/{id}/price")

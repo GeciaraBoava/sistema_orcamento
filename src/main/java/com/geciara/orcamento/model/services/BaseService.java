@@ -1,5 +1,6 @@
 package com.geciara.orcamento.model.services;
 
+import com.geciara.orcamento.model.exceptions.ItemNotFoundException;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
@@ -16,8 +17,9 @@ public abstract class BaseService<T, ID> {
         return repository.findAll();
     }
 
-    public Optional<T> findById(ID id) {
-        return repository.findById(id);
+    public T findById(ID id) {
+        return repository.findById(id)
+                .orElseThrow(ItemNotFoundException::new);
     }
 
     public T save(T entity) {
