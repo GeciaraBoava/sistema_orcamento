@@ -6,7 +6,7 @@ import jakarta.persistence.*;
 import java.time.LocalDateTime;
 
 @MappedSuperclass
-public abstract class BaseEntitys {
+public abstract class GenericEntitys {
 
     protected String name;
     protected String phone;
@@ -23,15 +23,15 @@ public abstract class BaseEntitys {
     @JsonFormat(pattern = "dd/MM/yyyy")
     protected LocalDateTime updateDate;
 
-    public BaseEntitys() {}
+    public GenericEntitys() {}
 
-    public BaseEntitys(String name,
-                       String phone,
-                       String contactName,
-                       String email,
-                       String adress,
-                       String city,
-                       String state) {
+    public GenericEntitys(String name,
+                          String phone,
+                          String contactName,
+                          String email,
+                          String adress,
+                          String city,
+                          String state) {
         this.name = name;
         this.phone = phone;
         this.contactName = contactName;
@@ -91,12 +91,20 @@ public abstract class BaseEntitys {
         this.updateDate = updateDate;
     }
 
+    public boolean isNotActive() {
+        return active = false;
+    }
+
+    public boolean isActive() {
+        return active = true;
+    }
+
     @Override
     public String toString() {
-        return "Nome: " + name +
-                "Telefone: " +  phone +
-                "Contato: " + contactName +
-                "E-mail: " + email +
+        return "Nome: " + name + "/n" +
+                "Telefone: " +  phone + "/n" +
+                "Contato: " + contactName + "/n" +
+                "E-mail: " + email + "/n" +
                 "Endereço: " + adress + ", " + city + "/" + state + "/n" +
                 "Situação: " + active + "/n" +
                 "Data de criação:  " + creationDate + "/n" +

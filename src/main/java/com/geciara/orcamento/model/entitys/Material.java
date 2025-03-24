@@ -15,17 +15,22 @@ public class Material {
     @SequenceGenerator(name = "material_seq", sequenceName = "material_seq", allocationSize = 1)
     private Long id;
 
+    @Column(nullable = false)
     private MaterialType type;
+
+    @Column(nullable = false, length = 255)
     private String description;
+
+    @Column(nullable = false)
     private UnitMeasure unitMeasure;
 
     @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDateTime creationDate;
 
-    @JsonFormat(pattern = "dd/MM/yyyy")
-    private LocalDateTime updateDate;
-
+    @Column(nullable = false, precision = 10, scale = 2)
     private BigDecimal price;
+
+    @Column(nullable = false)
     private boolean active;
 
     public Material() {}
@@ -59,8 +64,6 @@ public class Material {
     public LocalDateTime getCreationDate() { return creationDate; }
 
     public void setCreationDate(LocalDateTime creationDate) { this.creationDate = creationDate; }
-
-    public void setUpdateDate(LocalDateTime updateDate) { this.updateDate = updateDate; }
 
     public BigDecimal getPrice() { return price; }
 

@@ -7,11 +7,11 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-public abstract class BaseController<T, S extends BaseService<T>> {
+public abstract class GenericController<T, S extends BaseService<T>> {
 
     protected final S service;
 
-    public BaseController(S service) {
+    public GenericController(S service) {
         this.service = service;
     }
 
@@ -27,7 +27,8 @@ public abstract class BaseController<T, S extends BaseService<T>> {
 
     @PostMapping
     public ResponseEntity<T> save(@RequestBody T entity) {
-        return ResponseEntity.ok(service.save(entity));
+        T savedEntity = service.save(entity);
+        return ResponseEntity.status(HttpStatus.CREATED).body(savedEntity);
     }
 
     @DeleteMapping("/{id}")
@@ -37,14 +38,9 @@ public abstract class BaseController<T, S extends BaseService<T>> {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<String> update(@PathVariable Long id, @RequestBody T updatedEntity) {
-        boolean updated = service.update(id, updatedEntity);
-        if (updated) {
-            return ResponseEntity.ok("item atualizado com sucesso");
-        } else {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Item não encontrado");
-        }
-
+    public ResponseEntity<T> update(@PathVariable Long id, @RequestBody T entity) {
+        T updatedEntity = service.update(id, entity);
+        return ResponseEntity.ok(updatedEntity);
 
     }
 

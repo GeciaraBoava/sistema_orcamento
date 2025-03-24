@@ -1,54 +1,38 @@
 package com.geciara.orcamento.model.entitys;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.geciara.orcamento.model.enums.AcessType;
 import jakarta.persistence.*;
 
-import java.time.LocalDateTime;
-
 @Entity
 @Table(name = "users")
-public class User {
+public class User extends GenericEntitys{
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "unit_measure_seq")
     @SequenceGenerator(name = "unit_measure_seq", sequenceName = "unit_measure_seq", allocationSize = 1)
     private Long id;
-    private String name;
-    private String email;
-    private AcessType acessType;
+
     private String password;
-    private boolean active;
-
-    @JsonFormat(pattern = "dd/MM/yyyy")
-    private LocalDateTime creationDate;
-
-    @JsonFormat(pattern = "dd/MM/yyyy")
-    private LocalDateTime updateDate;
+    private AcessType acessType;
 
     public User() {}
 
     public User(String name,
+                String phone,
+                String contactName,
                 String email,
-                AcessType acessType,
-                String password) {
-        this.name = name;
-        this.email = email;
-        this.acessType = acessType;
+                String adress,
+                String city,
+                String state,
+                String password,
+                AcessType acessType) {
+        super(name, phone, contactName, email, adress, city, state);
         this.password = password;
-        this.active = true;
-        this.creationDate = LocalDateTime.now();
+        this.acessType = acessType;
     }
 
     public Long getId() { return id; }
 
-    public String getName() { return  name; }
-
-    public void setName(String name) { this.name = name; }
-
-    public String getEmail() { return email; }
-
-    public void setEmail(String email) { this.email = email; }
 
     public AcessType getAcessType() { return acessType; }
 
@@ -58,21 +42,15 @@ public class User {
 
     public void setPassword(String password) { this.password = password; }
 
-    public boolean getActive() { return active; }
-
-    public void setActive(boolean active) { this.active = active; }
-
-    public LocalDateTime getCreationDate() { return creationDate; }
-
-    public LocalDateTime getUpdateDate() { return updateDate; }
-
-    public void setUpdateDate(LocalDateTime updateDate) { this.updateDate = updateDate; }
 
     @Override
     public String toString() {
-        return "Nome: " + name + "/n" +
-                "E-mail: " +  email + "/n" +
+        return "Nome: " + name +
                 "Tipo de acesso: " + acessType + "/n" +
+                "Telefone: " +  phone +
+                "Contato: " + contactName +
+                "E-mail: " + email +
+                "Endereço: " + adress + ", " + city + "/" + state + "/n" +
                 "Situação: " + active + "/n" +
                 "Data de criação:  " + creationDate + "/n" +
                 "Data de alteração" + updateDate;

@@ -11,6 +11,7 @@ public class UnitMeasure {
     @SequenceGenerator(name = "unit_measure_seq", sequenceName = "unit_measure_seq", allocationSize = 1)
     private Long id;
 
+    @Column(nullable = false, length = 50)
     private String descricao;
 
     public UnitMeasure() {}

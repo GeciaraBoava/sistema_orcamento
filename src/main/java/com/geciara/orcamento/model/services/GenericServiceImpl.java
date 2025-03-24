@@ -10,11 +10,11 @@ import java.beans.FeatureDescriptor;
 import java.util.Arrays;
 import java.util.List;
 
-public abstract class BaseServiceImpl<T, R extends JpaRepository<T, Long>> implements BaseService<T>{
+public abstract class GenericServiceImpl<T, R extends JpaRepository<T, Long>> implements BaseService<T>{
 
     protected final R repository;
 
-    public BaseServiceImpl(R repository) {
+    public GenericServiceImpl(R repository) {
         this.repository = repository;
     }
 

@@ -11,7 +11,7 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Service
-public class MaterialService extends BaseServiceImpl<Material, MaterialRepository> {
+public class MaterialService extends GenericServiceImpl<Material, MaterialRepository> {
 
     public MaterialService(MaterialRepository materialRepository) {
         super(materialRepository);
