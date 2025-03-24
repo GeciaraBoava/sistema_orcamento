@@ -10,7 +10,11 @@ public class MaterialType {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "material_type_seq")
     @SequenceGenerator(name = "material_type_seq", sequenceName = "material_type_seq", allocationSize = 1)
     private Long id;
+
+    @Column(unique = true, nullable = false, length = 50)
     private String descricao;
+
+    @Column(nullable = false)
     private boolean active;
 
     public MaterialType() {}

@@ -10,11 +10,11 @@ import java.beans.FeatureDescriptor;
 import java.util.Arrays;
 import java.util.List;
 
-public abstract class BaseServiceImpl<T, R extends JpaRepository<T, Long>> implements BaseService<T>{
+public abstract class GenericServiceImpl<T, R extends JpaRepository<T, Long>> implements BaseService<T>{
 
     protected final R repository;
 
-    public BaseServiceImpl(R repository) {
+    public GenericServiceImpl(R repository) {
         this.repository = repository;
     }
 
@@ -55,7 +55,7 @@ public abstract class BaseServiceImpl<T, R extends JpaRepository<T, Long>> imple
         BeanUtils.copyProperties(source, target, getNullPropertyNames(source)); //copia as propriedades de um objeto para outro
     }
 
-    //cria um array com as propiedades nulas, a serem ignoradas ao copiar e sobrescrever
+    //cria um array com as propriedades nulas, a serem ignoradas ao copiar e sobrescrever
     private String[] getNullPropertyNames(T source) {
         final BeanWrapper wrappedSource = new BeanWrapperImpl(source);
         return Arrays.stream(wrappedSource.getPropertyDescriptors())

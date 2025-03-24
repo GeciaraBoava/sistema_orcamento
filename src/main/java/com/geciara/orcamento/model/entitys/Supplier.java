@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 
 @Entity
 @Table(name = "supplier")
-public class Supplier extends BaseEntitys {
+public class Supplier extends GenericEntitys {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "supplier_seq")

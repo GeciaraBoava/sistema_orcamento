@@ -6,32 +6,47 @@ import jakarta.persistence.*;
 import java.time.LocalDateTime;
 
 @MappedSuperclass
-public abstract class BaseEntitys {
+public abstract class GenericEntitys {
 
+    @Column(unique = true, nullable = false)
     protected String name;
+
+    @Column(unique = true, nullable = false)
     protected String phone;
+
+    @Column(unique = true, nullable = false)
     protected String contactName;
+
+    @Column(unique = true, nullable = false)
     protected String email;
+
+    @Column(unique = true, nullable = false)
     protected String adress;
+
+    @Column(unique = true, nullable = false)
     protected String city;
+
+    @Column(unique = true, nullable = false)
     protected String state;
+
+    @Column(unique = true, nullable = false)
     protected boolean active;
 
     @JsonFormat(pattern = "dd/MM/yyyy")
-    protected LocalDateTime creationDate;
+    protected LocalDateTime registeredAt;
 
     @JsonFormat(pattern = "dd/MM/yyyy")
-    protected LocalDateTime updateDate;
+    protected LocalDateTime updatedAt;
 
-    public BaseEntitys() {}
+    public GenericEntitys() {}
 
-    public BaseEntitys(String name,
-                       String phone,
-                       String contactName,
-                       String email,
-                       String adress,
-                       String city,
-                       String state) {
+    public GenericEntitys(String name,
+                          String phone,
+                          String contactName,
+                          String email,
+                          String adress,
+                          String city,
+                          String state) {
         this.name = name;
         this.phone = phone;
         this.contactName = contactName;
@@ -40,7 +55,7 @@ public abstract class BaseEntitys {
         this.city = city;
         this.state = state;
         this.active = true;
-        this.creationDate = LocalDateTime.now();
+        this.registeredAt = LocalDateTime.now();
     }
 
     public String getName() {
@@ -80,27 +95,35 @@ public abstract class BaseEntitys {
     }
 
     public LocalDateTime getCreationDate() {
-        return creationDate;
+        return registeredAt;
     }
 
-    public LocalDateTime getUpdateDate() {
-        return updateDate;
+    public LocalDateTime getUpdatedAt() {
+        return updatedAt;
     }
 
-    public void setUpdateDate(LocalDateTime updateDate) {
-        this.updateDate = updateDate;
+    public void setUpdatedAt(LocalDateTime updatedAt) {
+        this.updatedAt = updatedAt;
+    }
+
+    public boolean isNotActive() {
+        return active = false;
+    }
+
+    public boolean isActive() {
+        return active = true;
     }
 
     @Override
     public String toString() {
-        return "Nome: " + name +
-                "Telefone: " +  phone +
-                "Contato: " + contactName +
-                "E-mail: " + email +
+        return "Nome: " + name + "/n" +
+                "Telefone: " +  phone + "/n" +
+                "Contato: " + contactName + "/n" +
+                "E-mail: " + email + "/n" +
                 "Endereço: " + adress + ", " + city + "/" + state + "/n" +
                 "Situação: " + active + "/n" +
-                "Data de criação:  " + creationDate + "/n" +
-                "Data de alteração" + updateDate;
+                "Data de criação:  " + registeredAt + "/n" +
+                "Data de alteração" + updatedAt;
     }
 
 }
