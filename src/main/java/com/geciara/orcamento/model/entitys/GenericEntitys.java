@@ -106,12 +106,12 @@ public abstract class GenericEntitys {
         this.updatedAt = updatedAt;
     }
 
-    public boolean isNotActive() {
-        return active = false;
-    }
-
     public boolean isActive() {
         return active = true;
+    }
+
+    public boolean isNotActive() {
+        return active = false;
     }
 
     @Override
