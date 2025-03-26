@@ -1,4 +1,4 @@
-package com.geciara.orcamento.model.services;
+package com.geciara.orcamento.services;
 
 import java.util.List;
 

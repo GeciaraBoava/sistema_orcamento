@@ -1,4 +1,4 @@
-package com.geciara.orcamento.model.services;
+package com.geciara.orcamento.services;
 
 import com.geciara.orcamento.model.entitys.Customer;
 import com.geciara.orcamento.repository.CustomerRepository;

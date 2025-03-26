@@ -1,4 +1,4 @@
-package com.geciara.orcamento.model.dto;
+package com.geciara.orcamento.services.dto;
 
 import java.math.BigDecimal;
 

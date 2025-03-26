@@ -1,6 +1,6 @@
-package com.geciara.orcamento.model.services;
+package com.geciara.orcamento.services;
 
-import com.geciara.orcamento.model.exceptions.ItemNotFoundException;
+import com.geciara.orcamento.exceptions.ItemNotFoundException;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.BeanWrapper;
 import org.springframework.beans.BeanWrapperImpl;

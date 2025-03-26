@@ -1,4 +1,4 @@
-package com.geciara.orcamento.model.exceptions;
+package com.geciara.orcamento.exceptions;
 
 public class InvalidPriceException extends RuntimeException {
     public InvalidPriceException() {
