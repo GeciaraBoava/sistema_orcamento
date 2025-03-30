@@ -2,7 +2,12 @@ package com.geciara.orcamento.model.entitys;
 
 import com.geciara.orcamento.model.enums.CustomerType;
 import jakarta.persistence.*;
+import lombok.*;
 
+@EqualsAndHashCode(callSuper = true)
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "customer")
 public class Customer extends GenericEntitys {
@@ -15,8 +20,6 @@ public class Customer extends GenericEntitys {
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private CustomerType customerType;
-
-    public Customer() { }
 
     public Customer(String name,
                     String phone,
@@ -31,11 +34,4 @@ public class Customer extends GenericEntitys {
 
     }
 
-    public CustomerType getCustomerType() { return customerType; }
-
-    public void setCustomerType(CustomerType customerType) {
-        this.customerType = customerType;
-    }
-
-    public Long getId() { return id; }
 }

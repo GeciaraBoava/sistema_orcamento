@@ -2,6 +2,9 @@ package com.geciara.orcamento.model.entitys;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -13,6 +16,9 @@ import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "material")
 public class Material {
@@ -27,14 +33,17 @@ public class Material {
 
     @ManyToOne
     @JoinColumn(name = "material_type_id", nullable = false)
-    private MaterialType type;
+    private Long materialTypeId;
 
     @ManyToOne
     @JoinColumn(name = "unit_measure_id", nullable = false)
-    private UnitMeasure unitMeasure;
+    private Long unitMeasureId;
 
     @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDateTime registeredAt;
+
+    @JsonFormat(pattern = "dd/MM/yyyy")
+    private LocalDateTime updatedAt;
 
     @Column(name = "current_price")
     private BigDecimal currentPrice;
@@ -44,65 +53,18 @@ public class Material {
     private Set<PriceHistory> priceHistories = new HashSet<>();
 
     @Column(nullable = false)
-    private boolean active;
-
-    public Material() {}
+    private boolean isActive;
 
     public Material(String description,
-                    MaterialType type,
-                    UnitMeasure unitMeasure,
+                    Long materialTypeId,
+                    Long unitMeasureId,
                     BigDecimal currentPrice) {
         this.description = description;
-        this.type = type;
-        this.unitMeasure = unitMeasure;
+        this.materialTypeId = materialTypeId;
+        this.unitMeasureId = unitMeasureId;
         this.registeredAt = LocalDateTime.now();
         this.currentPrice = currentPrice;
-        this.active = true;
     }
-
-    public Long getId() { return id; }
-
-    public MaterialType getType() { return type; }
-
-    public void setType(MaterialType type) { this.type = type; }
-
-    public String getDescription() { return description; }
-
-    public void setDescription(String description) { this.description = description; }
-
-    public UnitMeasure getUnitMeasure() { return unitMeasure; }
-
-    public void setUnitMeasure(UnitMeasure unitMeasure) { this.unitMeasure = unitMeasure;}
-
-    public LocalDateTime getRegisteredAt() { return registeredAt; }
-
-    public void setRegisteredAt(LocalDateTime registeredAt) { this.registeredAt = registeredAt; }
-
-    public BigDecimal getCurrentPrice() {
-        return currentPrice;
-    }
-
-    public void setCurrentPrice(BigDecimal currentPrice) {
-        this.currentPrice = currentPrice;
-    }
-
-    public boolean getActive() {
-        return active;
-    }
-
-    public void setActive(boolean active) {
-        this.active = active;
-    }
-
-
-    //manter o preço principal da planilha de insumos sempre atualizado
-    public void updatePrice(BigDecimal newPrice, User user) {
-        PriceHistory updatedPrice = new PriceHistory(newPrice, user.getName(), LocalDateTime.now());
-
-        priceHistories.add(updatedPrice);
-        this.currentPrice = newPrice;
-    }
-
 
     //buscar preço conforme data-base do orçamento
     public BigDecimal getPriceByBaseData(LocalDate baseDate) throws IllegalAccessException {

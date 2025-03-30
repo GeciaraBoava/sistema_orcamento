@@ -1,7 +1,7 @@
 package com.geciara.orcamento.controller;
 
-import com.geciara.orcamento.exceptions.InvalidPriceException;
-import com.geciara.orcamento.exceptions.ItemNotFoundException;
+import com.geciara.orcamento.model.exceptions.InvalidPriceException;
+import com.geciara.orcamento.model.exceptions.ItemNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
