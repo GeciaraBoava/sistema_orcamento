@@ -47,8 +47,6 @@ public abstract class GenericEntitys {
     @JsonFormat(pattern = "dd/MM/yyyy")
     protected LocalDateTime updatedAt;
 
-    public GenericEntitys() {}
-
     public GenericEntitys(String name,
                           String phone,
                           String contactName,

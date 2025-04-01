@@ -1,6 +1,7 @@
 package com.geciara.orcamento.model.entitys;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.geciara.orcamento.exceptions.ItemNotFoundException;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -33,11 +34,11 @@ public class Material {
 
     @ManyToOne
     @JoinColumn(name = "material_type_id", nullable = false)
-    private Long materialTypeId;
+    private MaterialType materialType;
 
     @ManyToOne
     @JoinColumn(name = "unit_measure_id", nullable = false)
-    private Long unitMeasureId;
+    private UnitMeasure unitMeasure;
 
     @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDateTime registeredAt;
@@ -56,18 +57,18 @@ public class Material {
     private boolean isActive;
 
     public Material(String description,
-                    Long materialTypeId,
-                    Long unitMeasureId,
+                    MaterialType materialType,
+                    UnitMeasure unitMeasure,
                     BigDecimal currentPrice) {
         this.description = description;
-        this.materialTypeId = materialTypeId;
-        this.unitMeasureId = unitMeasureId;
+        this.materialType = materialType;
+        this.unitMeasure = unitMeasure;
         this.registeredAt = LocalDateTime.now();
         this.currentPrice = currentPrice;
     }
 
     //buscar preço conforme data-base do orçamento
-    public BigDecimal getPriceByBaseData(LocalDate baseDate) throws IllegalAccessException {
+    public BigDecimal getPriceByBaseData(LocalDate baseDate){
         LocalDateTime baseDateTime = baseDate.atTime(LocalTime.MAX);
 
         //busca o preço criado até a data base
@@ -83,7 +84,7 @@ public class Material {
                             ph -> ChronoUnit.DAYS.between(baseDateTime.toLocalDate(),
                                     ph.getRegisteredAt().toLocalDate())))
                     .map(PriceHistory::getPrice)
-                    .orElseThrow(() -> new IllegalAccessException("Nenhum preço cadastrado"));
+                    .orElseThrow(() -> new ItemNotFoundException("Nenhum preço cadastrado"));
         }
     }
 

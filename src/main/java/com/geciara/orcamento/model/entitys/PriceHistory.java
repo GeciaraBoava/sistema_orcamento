@@ -23,7 +23,7 @@ public class PriceHistory {
 
     @ManyToOne
     @JoinColumn(name = "material_id", nullable = false)
-    private Long materialId;
+    private Material material;
 
     @Column(nullable = false, precision = 10, scale = 2)
     private BigDecimal price;
@@ -32,9 +32,9 @@ public class PriceHistory {
     private LocalDateTime registeredAt;
 
     public PriceHistory(
-           Long materialId, BigDecimal price) {
+           Material material, BigDecimal price) {
 
-        this.materialId = materialId;
+        this.material = material;
         this.price = price;
 
     }

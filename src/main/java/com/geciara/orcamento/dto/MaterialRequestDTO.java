@@ -12,10 +12,10 @@ public class MaterialRequestDTO {
     private String description;
 
     @NotNull(message = "Tipo de material é obrigatório")
-    private Long materialTypeName;
+    private String materialTypeDescription;
 
     @NotNull(message = "Unidade de medida é obrigatório")
-    private Long unitMeasureName;
+    private String unitMeasureDescription;
 
     @NotBlank(message = "Preço atual é obrigatório")
     private BigDecimal currentPrice;

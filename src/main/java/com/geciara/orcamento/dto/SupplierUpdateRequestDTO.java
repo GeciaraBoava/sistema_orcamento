@@ -24,5 +24,5 @@ public class SupplierUpdateRequestDTO {
     private String state;
 
     private CustomerType customerType;
-    private boolean isActive;
+    private Boolean isActive;
 }

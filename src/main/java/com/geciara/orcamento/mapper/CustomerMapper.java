@@ -4,11 +4,13 @@ import com.geciara.orcamento.dto.CustomerRequestDTO;
 import com.geciara.orcamento.dto.CustomerResponseDTO;
 import com.geciara.orcamento.dto.CustomerUpdateRequestDTO;
 import com.geciara.orcamento.model.entitys.Customer;
+import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
 
+@Component
 public class CustomerMapper {
-    public static Customer toCustomerEntity(CustomerRequestDTO dto) {
+    public Customer toCustomerEntity(CustomerRequestDTO dto) {
 
         Customer customer = new Customer();
 
@@ -26,7 +28,7 @@ public class CustomerMapper {
         return customer;
     }
 
-    public static void updateEntityFromDTO(CustomerUpdateRequestDTO dto,
+    public Customer updateEntityFromDTO(CustomerUpdateRequestDTO dto,
                                     Customer customer) {
         if(dto.getName() != null) customer.setName(dto.getName());
         if(dto.getPhone() != null) customer.setPhone(dto.getPhone());
@@ -38,9 +40,11 @@ public class CustomerMapper {
         if(dto.getCustomerType() != null) customer.setCustomerType(dto.getCustomerType());
         if(dto.getIsActive() != null) customer.setActive(dto.getIsActive());
         customer.setUpdatedAt(LocalDateTime.now());
+
+        return customer;
     }
 
-    public static CustomerResponseDTO toResposeDTO(Customer customer) {
+    public CustomerResponseDTO toResponseDTO(Customer customer) {
         CustomerResponseDTO dto = new CustomerResponseDTO();
 
         dto.setId(customer.getId());

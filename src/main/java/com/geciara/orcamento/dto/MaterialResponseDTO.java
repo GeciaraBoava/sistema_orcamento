@@ -11,8 +11,8 @@ public class MaterialResponseDTO {
 
     private Long id;
     private String description;
-    private Long materialTypeId;
-    private Long unitMeasureId;
+    private String materialTypeDescription;
+    private String unitMeasureDescription;
     private BigDecimal currentPrice;
     private boolean isActive;
 

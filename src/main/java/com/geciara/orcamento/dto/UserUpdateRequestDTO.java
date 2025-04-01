@@ -1,12 +1,9 @@
 package com.geciara.orcamento.dto;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.geciara.orcamento.model.enums.AcessType;
-import com.geciara.orcamento.model.enums.CustomerType;
 import jakarta.validation.constraints.*;
 import lombok.Data;
 
-import java.time.LocalDateTime;
 
 @Data
 public class UserUpdateRequestDTO {
@@ -25,6 +22,6 @@ public class UserUpdateRequestDTO {
     private String state;
 
     private AcessType acessType;
-    private boolean isActive;
+    private Boolean isActive;
 
 }

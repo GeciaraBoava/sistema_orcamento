@@ -8,8 +8,8 @@ import java.math.BigDecimal;
 public class MaterialUpdateRequestDTO {
     
     private String description;
-    private Long materialTypeId;
-    private Long unitMeasureId;
+    private String materialTypeDescription;
+    private String unitMeasureDescription;
     private BigDecimal currentPrice;
     private Boolean isActive;
 

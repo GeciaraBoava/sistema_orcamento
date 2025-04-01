@@ -3,13 +3,15 @@ package com.geciara.orcamento.mapper;
 import com.geciara.orcamento.dto.MaterialTypeRequestDTO;
 import com.geciara.orcamento.dto.MaterialTypeResponseDTO;
 import com.geciara.orcamento.dto.MaterialTypeUpdateRequestDTO;
-import com.geciara.orcamento.dto.MaterialUpdateRequestDTO;
 import com.geciara.orcamento.model.entitys.MaterialType;
+import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
 
+@Component
 public class MaterialTypeMapper {
-    public static MaterialType toMaterialTypeEntity(MaterialTypeRequestDTO dto) {
+
+    public MaterialType toMaterialTypeEntity(MaterialTypeRequestDTO dto) {
 
         MaterialType materialType = new MaterialType();
 
@@ -20,14 +22,16 @@ public class MaterialTypeMapper {
         return materialType;
     }
 
-    public void updateEntityFromDTO(MaterialTypeUpdateRequestDTO dto,
+    public MaterialType updateEntityFromDTO(MaterialTypeUpdateRequestDTO dto,
                                     MaterialType materialType) {
         if(dto.getDescription() != null) materialType.setDescription(dto.getDescription());
         if(dto.getIsActive() != null) materialType.setActive(dto.getIsActive());
         materialType.setUpdatedAt(LocalDateTime.now());
+
+        return materialType;
     }
 
-    public static MaterialTypeResponseDTO toResponseDTO(MaterialType materialType) {
+    public MaterialTypeResponseDTO toResponseDTO(MaterialType materialType) {
         MaterialTypeResponseDTO dto = new MaterialTypeResponseDTO();
 
         dto.setId(materialType.getId());
