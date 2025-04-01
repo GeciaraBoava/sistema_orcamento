@@ -39,14 +39,13 @@ public class User extends GenericEntitys{
 
     public User(String name,
                 String phone,
-                String contactName,
                 String email,
                 String adress,
                 String city,
                 String state,
                 String password,
                 AcessType acessType) {
-        super(name, phone, contactName, email, adress, city, state);
+        super(name, phone, email, adress, city, state);
         this.password = password;
         this.acessType = acessType;
     }
@@ -56,7 +55,6 @@ public class User extends GenericEntitys{
         return "Nome: " + name +
                 "Tipo de acesso: " + acessType + "/n" +
                 "Telefone: " +  phone +
-                "Contato: " + contactName +
                 "E-mail: " + email +
                 "Endereço: " + adress + ", " + city + "/" + state + "/n" +
                 "Situação: " + isActive + "/n" +

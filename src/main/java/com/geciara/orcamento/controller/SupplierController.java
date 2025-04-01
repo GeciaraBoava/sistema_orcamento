@@ -4,12 +4,17 @@ import com.geciara.orcamento.dto.SupplierRequestDTO;
 import com.geciara.orcamento.dto.SupplierResponseDTO;
 import com.geciara.orcamento.dto.SupplierUpdateRequestDTO;
 import com.geciara.orcamento.service.SupplierService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@RestController
+@RequestMapping("/api/suppliers")
+@Validated
 public class SupplierController {
 
     private final SupplierService supplierService;
@@ -29,7 +34,7 @@ public class SupplierController {
     }
 
     @PostMapping
-    public ResponseEntity<SupplierResponseDTO> save(@RequestBody SupplierRequestDTO entity) {
+    public ResponseEntity<SupplierResponseDTO> save(@Valid @RequestBody SupplierRequestDTO entity) {
         SupplierResponseDTO savedEntity = supplierService.save(entity);
         return ResponseEntity.status(HttpStatus.CREATED).body(savedEntity);
     }
@@ -41,7 +46,7 @@ public class SupplierController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<SupplierResponseDTO> update(@PathVariable Long id, @RequestBody SupplierUpdateRequestDTO entity) {
+    public ResponseEntity<SupplierResponseDTO> update(@PathVariable Long id, @Valid @RequestBody SupplierUpdateRequestDTO entity) {
         SupplierResponseDTO updatedEntity = supplierService.update(id, entity);
         return ResponseEntity.ok(updatedEntity);
 

@@ -17,6 +17,9 @@ public class Customer extends GenericEntitys {
     @SequenceGenerator(name = "customer_seq", sequenceName = "customer_seq", allocationSize = 1)
     private Long id;
 
+    @Column(nullable = false)
+    protected String contactName;
+
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private CustomerType customerType;
@@ -29,9 +32,22 @@ public class Customer extends GenericEntitys {
                     String city,
                     String state,
                     CustomerType customerType) {
-        super(name, phone, contactName, email, adress, city, state);
+        super(name, phone, email, adress, city, state);
         this.customerType = customerType;
+        this.contactName = contactName;
+    }
 
+    @Override
+    public String toString() {
+        return "Nome: " + name +
+                "/n Telefone: " +  phone +
+                "/n Contato: " + contactName +
+                "/n E-mail: " + email + "/n" +
+                "/n Endereço: " + adress + ", " + city + "/" + state +
+                "/n Situação: " + isActive +
+                "/n Tipo: " + customerType +
+                "/n Data de criação:  " + registeredAt + "/n" +
+                "/n Data de alteração" + updatedAt;
     }
 
 }

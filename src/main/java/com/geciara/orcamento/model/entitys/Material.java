@@ -90,8 +90,8 @@ public class Material {
 
     @Override
     public String toString() {
-        return "Descrição:" + description + "/n" +
-                "Data do cadastro: " + registeredAt + "/n" +
-                "Preço: " + priceHistories;
+        return "Descrição:" + description +
+                "/n Data do cadastro: " + registeredAt +
+                "/n Preço: " + priceHistories;
     }
 }

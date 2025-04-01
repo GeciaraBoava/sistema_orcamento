@@ -10,7 +10,6 @@ public class UserUpdateRequestDTO {
 
     private String name;
     private String phone;
-    private String contactName;
 
     @Email(message = "Email inválido")
     private String email;
