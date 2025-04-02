@@ -1,14 +1,12 @@
 package com.geciara.orcamento.dto;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.geciara.orcamento.model.enums.AcessType;
-import com.geciara.orcamento.model.enums.CustomerType;
 import jakarta.validation.constraints.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
-import java.time.LocalDateTime;
-
 @Data
+@AllArgsConstructor
 public class UserRequestDTO {
 
     @NotBlank(message = "Nome é obrigatório")
@@ -16,9 +14,6 @@ public class UserRequestDTO {
 
     @NotBlank(message = "Telefone é obrigatório")
     private String phone;
-
-    @NotBlank(message = "Nome de contato é obrigatório")
-    private String contactName;
 
     @NotBlank(message = "Email é obrigatório")
     @Email(message = "Email inválido")
@@ -34,7 +29,7 @@ public class UserRequestDTO {
     @Size(min = 2, max = 2, message = "Estado deve ter 2 caracteres")
     private String state;
 
-    @NotNull(message = "Tipo de cliente é obrigatório")
+    @NotNull(message = "Tipo de acesso é obrigatório")
     private AcessType acessType;
 
 }
