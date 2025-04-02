@@ -2,9 +2,11 @@ package com.geciara.orcamento.dto;
 
 import com.geciara.orcamento.model.enums.AcessType;
 import jakarta.validation.constraints.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 @Data
+@AllArgsConstructor
 public class UserRequestDTO {
 
     @NotBlank(message = "Nome é obrigatório")

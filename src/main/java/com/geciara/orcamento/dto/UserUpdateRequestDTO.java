@@ -2,10 +2,14 @@ package com.geciara.orcamento.dto;
 
 import com.geciara.orcamento.model.enums.AcessType;
 import jakarta.validation.constraints.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class UserUpdateRequestDTO {
 
     private String name;
