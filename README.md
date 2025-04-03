@@ -23,13 +23,13 @@ O projeto visa unir minha experiência profissional na área de **orçamentos de
 
 ## 🔧 Funcionalidades
 
-✅ Cadastro e gerenciamento de insumos, fornecedores e clientes 
-✅ CRUD completo com validações e regras de negócio 
-✅ Cálculo de precificação baseado em composições unitárias 
-✅ Registro de histórico de preços 
-✅ Autenticação e autorização (JWT) 
-✅ Testes unitários e de integração 
-✅ API documentada com Swagger 
+✅ Cadastro e gerenciamento de insumos, fornecedores e clientes  
+✅ CRUD completo com validações e regras de negócio  
+✅ Cálculo de precificação baseado em composições unitárias  
+✅ Registro de histórico de preços  
+✅ Autenticação e autorização com JWT  
+✅ Testes unitários e de integração  
+✅ API documentada com Swagger  
 
 ---
 
