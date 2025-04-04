@@ -4,6 +4,9 @@ import com.geciara.orcamento.dto.CustomerRequestDTO;
 import com.geciara.orcamento.dto.CustomerResponseDTO;
 import com.geciara.orcamento.dto.CustomerUpdateRequestDTO;
 import com.geciara.orcamento.service.CustomerService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@Tag(name = "Clientes", description = "Gerenciamento de clientes do sistema")
 @RestController
 @RequestMapping("/api/customers")
 @Validated
@@ -28,13 +32,17 @@ public class CustomerController {
         return ResponseEntity.ok(customerService.listAll());
     }
 
+    @Operation(summary = "Buscar cliente por ID", description = "Recupera um cliente pelo seu ID")
+    @ApiResponse(responseCode = "200", description = "Cliente encontrado")
+    @ApiResponse(responseCode = "403", description = "Acesso negado")
+    @ApiResponse(responseCode = "404", description = "Cliente não encontrado")
     @GetMapping("/{id}")
     public ResponseEntity<CustomerResponseDTO> findById(@PathVariable Long id) {
         return ResponseEntity.ok(customerService.findById(id));
     }
 
     @PostMapping
-    public ResponseEntity<CustomerResponseDTO> save(@Valid @RequestBody CustomerRequestDTO entity) {
+    public ResponseEntity<CustomerResponseDTO> save(@RequestBody @Valid CustomerRequestDTO entity) {
         CustomerResponseDTO savedEntity = customerService.save(entity);
         return ResponseEntity.status(HttpStatus.CREATED).body(savedEntity);
     }
@@ -46,7 +54,7 @@ public class CustomerController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<CustomerResponseDTO> update(@PathVariable Long id, @Valid @RequestBody CustomerUpdateRequestDTO entity) {
+    public ResponseEntity<CustomerResponseDTO> update(@PathVariable Long id, @RequestBody @Valid CustomerUpdateRequestDTO entity) {
         CustomerResponseDTO updatedEntity = customerService.update(id, entity);
         return ResponseEntity.ok(updatedEntity);
 
