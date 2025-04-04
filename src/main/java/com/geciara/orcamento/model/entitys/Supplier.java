@@ -27,10 +27,10 @@ public class Supplier extends GenericEntitys {
                     String phone,
                     String contactName,
                     String email,
-                    String adress,
+                    String address,
                     String city,
                     String state) {
-        super(name, phone, email, adress, city, state);
+        super(name, phone, email, address, city, state);
         this.contactName = contactName;
 }
 
@@ -40,7 +40,7 @@ public class Supplier extends GenericEntitys {
                 "/n Telefone: " +  phone +
                 "/n Contato: " + contactName +
                 "/n E-mail: " + email + "/n" +
-                "/n Endereço: " + adress + ", " + city + "/" + state +
+                "/n Endereço: " + address + ", " + city + "/" + state +
                 "/n Situação: " + isActive +
                 "/n Data de criação:  " + registeredAt + "/n" +
                 "/n Data de alteração" + updatedAt;

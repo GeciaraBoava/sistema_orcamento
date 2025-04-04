@@ -26,7 +26,7 @@ public abstract class GenericEntitys {
     protected String email;
 
     @Column(nullable = false)
-    protected String adress;
+    protected String address;
 
     @Column(nullable = false)
     protected String city;
@@ -47,13 +47,13 @@ public abstract class GenericEntitys {
     public GenericEntitys(String name,
                           String phone,
                           String email,
-                          String adress,
+                          String address,
                           String city,
                           String state) {
         this.name = name;
         this.phone = phone;
         this.email = email;
-        this.adress = adress;
+        this.address = address;
         this.city = city;
         this.state = state;
     }
@@ -63,7 +63,7 @@ public abstract class GenericEntitys {
         return "Nome: " + name +
                 "/n Telefone: " +  phone +
                 "/n E-mail: " + email +
-                "/n Endereço: " + adress + ", " + city + "/" + state +
+                "/n Endereço: " + address + ", " + city + "/" + state +
                 "/n Situação: " + isActive +
                 "/n Data de criação:  " + registeredAt +
                 "/n Data de alteração" + updatedAt;

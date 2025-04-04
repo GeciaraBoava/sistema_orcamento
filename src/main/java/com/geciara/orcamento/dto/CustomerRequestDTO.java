@@ -21,7 +21,7 @@ public class CustomerRequestDTO {
     private String email;
 
     @NotBlank(message = "Endereço é obrigatório")
-    private String adress;
+    private String address;
 
     @NotBlank(message = "Cidade é obrigatória")
     private String city;

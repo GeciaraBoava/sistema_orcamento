@@ -1,6 +1,6 @@
 package com.geciara.orcamento.dto;
 
-import com.geciara.orcamento.model.enums.AcessType;
+import com.geciara.orcamento.model.enums.UserRole;
 import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -8,6 +8,9 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class UserRequestDTO {
+
+    @NotBlank(message = "Login é obrigatório")
+    private String login;
 
     @NotBlank(message = "Nome é obrigatório")
     private String name;
@@ -20,7 +23,7 @@ public class UserRequestDTO {
     private String email;
 
     @NotBlank(message = "Endereço é obrigatório")
-    private String adress;
+    private String address;
 
     @NotBlank(message = "Cidade é obrigatória")
     private String city;
@@ -30,6 +33,6 @@ public class UserRequestDTO {
     private String state;
 
     @NotNull(message = "Tipo de acesso é obrigatório")
-    private AcessType acessType;
+    private UserRole role;
 
 }

@@ -17,7 +17,7 @@ public class SupplierUpdateRequestDTO {
     @Email(message = "Email inválido")
     private String email;
 
-    private String adress;
+    private String address;
     private String city;
 
     @Size(min = 2, max = 2, message = "Estado deve ter 2 caracteres")
