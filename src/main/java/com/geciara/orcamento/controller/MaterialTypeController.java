@@ -34,7 +34,7 @@ public class MaterialTypeController {
     }
 
     @PostMapping
-    public ResponseEntity<MaterialTypeResponseDTO> save(@Valid @RequestBody MaterialTypeRequestDTO entity) {
+    public ResponseEntity<MaterialTypeResponseDTO> save(@RequestBody @Valid MaterialTypeRequestDTO entity) {
         MaterialTypeResponseDTO savedEntity = materialTypeService.save(entity);
         return ResponseEntity.status(HttpStatus.CREATED).body(savedEntity);
     }
@@ -46,7 +46,7 @@ public class MaterialTypeController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<MaterialTypeResponseDTO> update(@PathVariable Long id, @Valid @RequestBody MaterialTypeUpdateRequestDTO entity) {
+    public ResponseEntity<MaterialTypeResponseDTO> update(@PathVariable Long id, @RequestBody @Valid MaterialTypeUpdateRequestDTO entity) {
         MaterialTypeResponseDTO updatedEntity = materialTypeService.update(id, entity);
         return ResponseEntity.ok(updatedEntity);
 

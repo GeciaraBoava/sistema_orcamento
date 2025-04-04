@@ -34,7 +34,7 @@ public class CustomerController {
     }
 
     @PostMapping
-    public ResponseEntity<CustomerResponseDTO> save(@Valid @RequestBody CustomerRequestDTO entity) {
+    public ResponseEntity<CustomerResponseDTO> save(@RequestBody @Valid CustomerRequestDTO entity) {
         CustomerResponseDTO savedEntity = customerService.save(entity);
         return ResponseEntity.status(HttpStatus.CREATED).body(savedEntity);
     }
@@ -46,7 +46,7 @@ public class CustomerController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<CustomerResponseDTO> update(@PathVariable Long id, @Valid @RequestBody CustomerUpdateRequestDTO entity) {
+    public ResponseEntity<CustomerResponseDTO> update(@PathVariable Long id, @RequestBody @Valid CustomerUpdateRequestDTO entity) {
         CustomerResponseDTO updatedEntity = customerService.update(id, entity);
         return ResponseEntity.ok(updatedEntity);
 

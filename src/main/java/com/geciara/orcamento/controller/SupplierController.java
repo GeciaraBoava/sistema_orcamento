@@ -34,7 +34,7 @@ public class SupplierController {
     }
 
     @PostMapping
-    public ResponseEntity<SupplierResponseDTO> save(@Valid @RequestBody SupplierRequestDTO entity) {
+    public ResponseEntity<SupplierResponseDTO> save(@RequestBody @Valid SupplierRequestDTO entity) {
         SupplierResponseDTO savedEntity = supplierService.save(entity);
         return ResponseEntity.status(HttpStatus.CREATED).body(savedEntity);
     }
@@ -46,7 +46,7 @@ public class SupplierController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<SupplierResponseDTO> update(@PathVariable Long id, @Valid @RequestBody SupplierUpdateRequestDTO entity) {
+    public ResponseEntity<SupplierResponseDTO> update(@PathVariable Long id, @RequestBody @Valid SupplierUpdateRequestDTO entity) {
         SupplierResponseDTO updatedEntity = supplierService.update(id, entity);
         return ResponseEntity.ok(updatedEntity);
 

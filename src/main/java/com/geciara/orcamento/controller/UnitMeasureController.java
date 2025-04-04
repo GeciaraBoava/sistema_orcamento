@@ -34,7 +34,7 @@ public class UnitMeasureController {
     }
 
     @PostMapping
-    public ResponseEntity<UnitMeasureResponseDTO> save(@Valid @RequestBody UnitMeasureRequestDTO entity) {
+    public ResponseEntity<UnitMeasureResponseDTO> save(@RequestBody @Valid UnitMeasureRequestDTO entity) {
         UnitMeasureResponseDTO savedEntity = unitMeasureService.save(entity);
         return ResponseEntity.status(HttpStatus.CREATED).body(savedEntity);
     }
@@ -46,7 +46,7 @@ public class UnitMeasureController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<UnitMeasureResponseDTO> update(@PathVariable Long id, @Valid @RequestBody UnitMeasureUpdateRequestDTO entity) {
+    public ResponseEntity<UnitMeasureResponseDTO> update(@PathVariable Long id, @RequestBody @Valid UnitMeasureUpdateRequestDTO entity) {
         UnitMeasureResponseDTO updatedEntity = unitMeasureService.update(id, entity);
         return ResponseEntity.ok(updatedEntity);
 
