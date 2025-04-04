@@ -81,7 +81,7 @@ public class UserServiceTest {
         assertEquals("Rua Fulano de tal", result.getAddress());
         assertEquals("Curitiba", result.getCity());
         assertEquals("PR", result.getState());
-        assertEquals(ADMIN, result.getUserRole());
+        assertEquals(ADMIN, result.getRole());
 
         verify(userRepository, times(1)).save(user);
         verify(userMapper, times(1)).toResponseDTO(user);
@@ -144,7 +144,7 @@ public class UserServiceTest {
         assertEquals("Rua Fulano de tal", result.getAddress());
         assertEquals("Curitiba", result.getCity());
         assertEquals("PR", result.getState());
-        assertEquals(ADMIN, result.getUserRole());
+        assertEquals(ADMIN, result.getRole());
 
         verify(userRepository, times(1)).save(user);
         verify(userMapper, times(1)).toResponseDTO(user);
