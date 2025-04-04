@@ -4,6 +4,8 @@ import com.geciara.orcamento.dto.MaterialTypeRequestDTO;
 import com.geciara.orcamento.dto.MaterialTypeResponseDTO;
 import com.geciara.orcamento.dto.MaterialTypeUpdateRequestDTO;
 import com.geciara.orcamento.service.MaterialTypeService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -28,6 +30,10 @@ public class MaterialTypeController {
         return ResponseEntity.ok(materialTypeService.listAll());
     }
 
+    @Operation(summary = "Buscar tipo de insumo por ID", description = "Recupera um tipo de insumo pelo seu ID")
+    @ApiResponse(responseCode = "200", description = "Tipo de insumo encontrado")
+    @ApiResponse(responseCode = "403", description = "Acesso negado")
+    @ApiResponse(responseCode = "404", description = "tipo de insumo não encontrado")
     @GetMapping("/{id}")
     public ResponseEntity<MaterialTypeResponseDTO> findById(@PathVariable Long id) {
         return ResponseEntity.ok(materialTypeService.findById(id));
