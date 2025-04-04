@@ -18,7 +18,7 @@ public class CustomerMapper {
         customer.setPhone(dto.getPhone());
         customer.setContactName(dto.getContactName());
         customer.setEmail(dto.getEmail());
-        customer.setAdress(dto.getAdress());
+        customer.setAddress(dto.getAddress());
         customer.setCity(dto.getCity());
         customer.setState(dto.getState());
         customer.setCustomerType(dto.getCustomerType());
@@ -34,7 +34,7 @@ public class CustomerMapper {
         if(dto.getPhone() != null) customer.setPhone(dto.getPhone());
         if(dto.getContactName() != null) customer.setContactName(dto.getContactName());
         if(dto.getEmail() != null) customer.setEmail(dto.getEmail());
-        if(dto.getAdress() != null) customer.setAdress(dto.getAdress());
+        if(dto.getAddress() != null) customer.setAddress(dto.getAddress());
         if(dto.getCity() != null) customer.setCity(dto.getCity());
         if(dto.getState() != null) customer.setState(dto.getState());
         if(dto.getCustomerType() != null) customer.setCustomerType(dto.getCustomerType());
@@ -52,7 +52,7 @@ public class CustomerMapper {
         dto.setPhone(customer.getPhone());
         dto.setContactName(customer.getContactName());
         dto.setEmail(customer.getEmail());
-        dto.setAdress(customer.getAdress());
+        dto.setAddress(customer.getAddress());
         dto.setCity(customer.getCity());
         dto.setState(customer.getState());
         dto.setCustomerType(customer.getCustomerType());

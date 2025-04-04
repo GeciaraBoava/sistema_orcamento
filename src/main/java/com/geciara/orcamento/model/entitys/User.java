@@ -1,34 +1,43 @@
 package com.geciara.orcamento.model.entitys;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.geciara.orcamento.model.enums.AcessType;
+import com.geciara.orcamento.model.enums.UserRole;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import java.time.LocalDateTime;
+import java.util.Collection;
+import java.util.List;
 
-@EqualsAndHashCode(callSuper = true)
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity
+@Entity(name = "users")
 @Table(name = "users")
-public class User extends GenericEntitys{
+@EqualsAndHashCode(callSuper = true)
+public class User extends GenericEntitys implements UserDetails {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "unit_measure_seq")
-    @SequenceGenerator(name = "unit_measure_seq", sequenceName = "unit_measure_seq", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "users_seq")
+    @SequenceGenerator(name = "users_seq", sequenceName = "users_seq", allocationSize = 1)
     private Long id;
+
+    @Column(nullable = false)
+    private String login;
 
     @Column(nullable = false)
     private String password;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private AcessType acessType;
+    private UserRole role;
 
     @JsonFormat(pattern = "dd/MM/yyyy")
     @Column(nullable = false, updatable = false)
@@ -38,27 +47,84 @@ public class User extends GenericEntitys{
     protected LocalDateTime updatedAt;
 
     public User(String name,
+                String login,
                 String phone,
                 String email,
-                String adress,
+                String address,
                 String city,
                 String state,
                 String password,
-                AcessType acessType) {
-        super(name, phone, email, adress, city, state);
+                UserRole role) {
+        super(name, phone, email, address, city, state);
+        this.login = login;
         this.password = password;
-        this.acessType = acessType;
+        this.role = role;
     }
 
     @Override
     public String toString() {
         return "Nome: " + name +
-                "Tipo de acesso: " + acessType + "/n" +
-                "Telefone: " +  phone +
-                "E-mail: " + email +
-                "Endereço: " + adress + ", " + city + "/" + state + "/n" +
-                "Situação: " + isActive + "/n" +
-                "Data de criação:  " + registeredAt + "/n" +
-                "Data de alteração" + updatedAt;
+                "/nLogin: " + login +
+                "/nTipo de acesso: " + role +
+                "/nTelefone: " +  phone +
+                "/nE-mail: " + email +
+                "/nEndereço: " + address + ", " + city + "/" + state +
+                "/nSituação: " + isActive +
+                "/nData de criação:  " + registeredAt +
+                "/nData de alteração" + updatedAt;
+    }
+
+    //CONFIGURAÇÕES DE SEGURANÇA'
+
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        if (role == UserRole.ADMIN) {
+            return List.of(
+                    new SimpleGrantedAuthority("ROLE_ADMIN"),
+                    new SimpleGrantedAuthority("ROLE_MANAGER"),
+                    new SimpleGrantedAuthority("ROLE_BUDGET")
+            );
+        } else if (role == UserRole.MANAGER) {
+            return List.of(
+                    new SimpleGrantedAuthority("ROLE_MANAGER"),
+                    new SimpleGrantedAuthority("ROLE_BUDGET")
+            );
+        } else {
+            return List.of(new SimpleGrantedAuthority("ROLE_" + role.name()));
+        }
+    }
+
+    @Override
+    public String getUsername() {
+        return login;
+    }
+
+    @Override
+    public String getPassword() {
+        return password;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        //return UserDetails.super.isAccountNonExpired();
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        //return UserDetails.super.isAccountNonLocked();
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        //return UserDetails.super.isCredentialsNonExpired();
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return isActive;
     }
 }

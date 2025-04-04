@@ -18,7 +18,7 @@ public class SupplierMapper {
         supplier.setPhone(dto.getPhone());
         supplier.setContactName(dto.getContactName());
         supplier.setEmail(dto.getEmail());
-        supplier.setAdress(dto.getAdress());
+        supplier.setAddress(dto.getAddress());
         supplier.setCity(dto.getCity());
         supplier.setState(dto.getState());
         supplier.setRegisteredAt(LocalDateTime.now());
@@ -33,7 +33,7 @@ public class SupplierMapper {
         if(dto.getPhone() != null) supplier.setPhone(dto.getPhone());
         if(dto.getContactName() != null) supplier.setContactName(dto.getContactName());
         if(dto.getEmail() != null) supplier.setEmail(dto.getEmail());
-        if(dto.getAdress() != null) supplier.setAdress(dto.getAdress());
+        if(dto.getAddress() != null) supplier.setAddress(dto.getAddress());
         if(dto.getCity() != null) supplier.setCity(dto.getCity());
         if(dto.getState() != null) supplier.setState(dto.getState());
         if(dto.getIsActive() != null) supplier.setActive(dto.getIsActive());
@@ -50,7 +50,7 @@ public class SupplierMapper {
         dto.setPhone(supplier.getPhone());
         dto.setContactName(supplier.getContactName());
         dto.setEmail(supplier.getEmail());
-        dto.setAdress(supplier.getAdress());
+        dto.setAddress(supplier.getAddress());
         dto.setCity(supplier.getCity());
         dto.setState(supplier.getState());
         dto.setActive(supplier.isActive());

@@ -7,6 +7,7 @@ import com.geciara.orcamento.exceptions.ItemNotFoundException;
 import com.geciara.orcamento.mapper.UserMapper;
 import com.geciara.orcamento.model.entitys.User;
 import com.geciara.orcamento.repository.UserRepository;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,10 +18,12 @@ public class UserService {
 
     private final UserRepository userRepository;
     private final UserMapper userMapper;
+    private final BCryptPasswordEncoder passwordEncoder;
 
-    public UserService(UserRepository userRepository, UserMapper userMapper) {
+    public UserService(UserRepository userRepository, UserMapper userMapper, BCryptPasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
         this.userMapper = userMapper;
+        this.passwordEncoder = passwordEncoder;
     }
 
     public UserResponseDTO save(UserRequestDTO dto) {
@@ -56,5 +59,13 @@ public class UserService {
         }
         userRepository.deleteById(id);
     }
+
+    public void updatePassword(Long id, String novaSenha) {
+        User user = userRepository.findById(id)
+                .orElseThrow(() -> new ItemNotFoundException("Usuário não encontrado"));
+        user.setPassword(passwordEncoder.encode(novaSenha));
+        userRepository.save(user);
+    }
+
 
 }
