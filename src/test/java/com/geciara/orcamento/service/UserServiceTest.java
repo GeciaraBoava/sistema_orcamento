@@ -4,7 +4,7 @@ import com.geciara.orcamento.dto.UserRequestDTO;
 import com.geciara.orcamento.dto.UserResponseDTO;
 import com.geciara.orcamento.dto.UserUpdateRequestDTO;
 import com.geciara.orcamento.mapper.UserMapper;
-import com.geciara.orcamento.model.entitys.User;
+import com.geciara.orcamento.model.entitys.UserEntity;
 import com.geciara.orcamento.repository.UserRepository;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -39,7 +39,7 @@ public class UserServiceTest {
                 ADMIN
         );
 
-        User user = new User(
+        UserEntity user = new UserEntity(
                 "Geciara Boava",
                 "GeciaraBoava",
                 "000000009",
@@ -81,7 +81,7 @@ public class UserServiceTest {
         assertEquals("Rua Fulano de tal", result.getAddress());
         assertEquals("Curitiba", result.getCity());
         assertEquals("PR", result.getState());
-        assertEquals(ADMIN, result.getUserRole());
+        assertEquals(ADMIN, result.getRole());
 
         verify(userRepository, times(1)).save(user);
         verify(userMapper, times(1)).toResponseDTO(user);
@@ -102,7 +102,7 @@ public class UserServiceTest {
                 true
         );
 
-        User user = new User(
+        UserEntity user = new UserEntity(
                 "Geciara Boava",
                 "GeciaraBoava",
                 "000000009",
@@ -144,7 +144,7 @@ public class UserServiceTest {
         assertEquals("Rua Fulano de tal", result.getAddress());
         assertEquals("Curitiba", result.getCity());
         assertEquals("PR", result.getState());
-        assertEquals(ADMIN, result.getUserRole());
+        assertEquals(ADMIN, result.getRole());
 
         verify(userRepository, times(1)).save(user);
         verify(userMapper, times(1)).toResponseDTO(user);

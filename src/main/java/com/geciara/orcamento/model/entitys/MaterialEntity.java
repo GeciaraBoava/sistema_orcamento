@@ -1,10 +1,10 @@
 package com.geciara.orcamento.model.entitys;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.geciara.orcamento.exceptions.ItemNotFoundException;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
@@ -17,53 +17,47 @@ import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 
+@EqualsAndHashCode(callSuper = true)
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
 @Table(name = "material")
-public class Material {
+public class MaterialEntity extends BaseEntityAudit {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "material_seq")
     @SequenceGenerator(name = "material_seq", sequenceName = "material_seq", allocationSize = 1)
     private Long id;
 
-    @Column(nullable = false, length = 255, unique = true)
+    @Column(nullable = false, unique = true)
     private String description;
 
     @ManyToOne
     @JoinColumn(name = "material_type_id", nullable = false)
-    private MaterialType materialType;
+    private MaterialTypeEntity materialType;
 
     @ManyToOne
     @JoinColumn(name = "unit_measure_id", nullable = false)
-    private UnitMeasure unitMeasure;
-
-    @JsonFormat(pattern = "dd/MM/yyyy")
-    private LocalDateTime registeredAt;
-
-    @JsonFormat(pattern = "dd/MM/yyyy")
-    private LocalDateTime updatedAt;
+    private UnitMeasureEntity unitMeasure;
 
     @Column(name = "current_price")
     private BigDecimal currentPrice;
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true) //remove preços se o material for deletado e vice-versa
     @JoinColumn(name = "material_id")
-    private Set<PriceHistory> priceHistories = new HashSet<>();
+    private Set<PriceHistoryEntity> priceHistories = new HashSet<>();
 
     @Column(nullable = false)
     private boolean isActive;
 
-    public Material(String description,
-                    MaterialType materialType,
-                    UnitMeasure unitMeasure,
-                    BigDecimal currentPrice) {
+    public MaterialEntity(String description,
+                          MaterialTypeEntity materialType,
+                          UnitMeasureEntity unitMeasure,
+                          BigDecimal currentPrice) {
         this.description = description;
         this.materialType = materialType;
         this.unitMeasure = unitMeasure;
-        this.registeredAt = LocalDateTime.now();
         this.currentPrice = currentPrice;
     }
 
@@ -72,9 +66,9 @@ public class Material {
         LocalDateTime baseDateTime = baseDate.atTime(LocalTime.MAX);
 
         //busca o preço criado até a data base
-        Optional<PriceHistory> priceUpToBaseDate = priceHistories.stream()
+        Optional<PriceHistoryEntity> priceUpToBaseDate = priceHistories.stream()
                 .filter(ph -> !ph.getRegisteredAt().isAfter(baseDateTime))
-                .max(Comparator.comparing(PriceHistory::getRegisteredAt));
+                .max(Comparator.comparing(PriceHistoryEntity::getRegisteredAt));
 
         if(priceUpToBaseDate.isPresent()) {
             return priceUpToBaseDate.get().getPrice();
@@ -83,7 +77,7 @@ public class Material {
                     .min(Comparator.comparingLong(
                             ph -> ChronoUnit.DAYS.between(baseDateTime.toLocalDate(),
                                     ph.getRegisteredAt().toLocalDate())))
-                    .map(PriceHistory::getPrice)
+                    .map(PriceHistoryEntity::getPrice)
                     .orElseThrow(() -> new ItemNotFoundException("Nenhum preço cadastrado"));
         }
     }

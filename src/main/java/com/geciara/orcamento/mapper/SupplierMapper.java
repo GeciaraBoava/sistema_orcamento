@@ -3,16 +3,16 @@ package com.geciara.orcamento.mapper;
 import com.geciara.orcamento.dto.SupplierRequestDTO;
 import com.geciara.orcamento.dto.SupplierResponseDTO;
 import com.geciara.orcamento.dto.SupplierUpdateRequestDTO;
-import com.geciara.orcamento.model.entitys.Supplier;
+import com.geciara.orcamento.model.entitys.SupplierEntity;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
 
 @Component
 public class SupplierMapper {
-    public Supplier toSupplierEntity(SupplierRequestDTO dto) {
+    public SupplierEntity toSupplierEntity(SupplierRequestDTO dto) {
 
-        Supplier supplier = new Supplier();
+        SupplierEntity supplier = new SupplierEntity();
 
         supplier.setName(dto.getName());
         supplier.setPhone(dto.getPhone());
@@ -27,8 +27,8 @@ public class SupplierMapper {
         return supplier;
     }
 
-    public Supplier updateEntityFromDTO(SupplierUpdateRequestDTO dto,
-                                        Supplier supplier) {
+    public SupplierEntity updateEntityFromDTO(SupplierUpdateRequestDTO dto,
+                                              SupplierEntity supplier) {
         if(dto.getName() != null) supplier.setName(dto.getName());
         if(dto.getPhone() != null) supplier.setPhone(dto.getPhone());
         if(dto.getContactName() != null) supplier.setContactName(dto.getContactName());
@@ -42,7 +42,7 @@ public class SupplierMapper {
         return supplier;
     }
 
-    public SupplierResponseDTO toResponseDTO(Supplier supplier) {
+    public SupplierResponseDTO toResponseDTO(SupplierEntity supplier) {
         SupplierResponseDTO dto = new SupplierResponseDTO();
 
         dto.setId(supplier.getId());
@@ -54,6 +54,8 @@ public class SupplierMapper {
         dto.setCity(supplier.getCity());
         dto.setState(supplier.getState());
         dto.setActive(supplier.isActive());
+        dto.setCreatedBy(supplier.getCreatedBy());
+        dto.setUpdatedBy(supplier.getUpdatedBy());
         dto.setRegisteredAt(supplier.getRegisteredAt());
         dto.setUpdatedAt(supplier.getUpdatedAt());
 

@@ -4,13 +4,15 @@ import com.geciara.orcamento.model.enums.CustomerType;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.LocalDateTime;
+
 @EqualsAndHashCode(callSuper = true)
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
 @Table(name = "customer")
-public class Customer extends GenericEntitys {
+public class CustomerEntity extends GenericEntitys {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "customer_seq")
@@ -24,14 +26,14 @@ public class Customer extends GenericEntitys {
     @Column(nullable = false)
     private CustomerType customerType;
 
-    public Customer(String name,
-                    String phone,
-                    String contactName,
-                    String email,
-                    String address,
-                    String city,
-                    String state,
-                    CustomerType customerType) {
+    public CustomerEntity(String name,
+                          String phone,
+                          String contactName,
+                          String email,
+                          String address,
+                          String city,
+                          String state,
+                          CustomerType customerType) {
         super(name, phone, email, address, city, state);
         this.customerType = customerType;
         this.contactName = contactName;

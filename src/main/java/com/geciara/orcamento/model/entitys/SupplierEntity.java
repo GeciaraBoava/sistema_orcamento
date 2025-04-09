@@ -1,6 +1,5 @@
 package com.geciara.orcamento.model.entitys;
 
-import com.geciara.orcamento.model.enums.CustomerType;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -13,7 +12,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Entity
 @Table(name = "supplier")
-public class Supplier extends GenericEntitys {
+public class SupplierEntity extends GenericEntitys {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "supplier_seq")
@@ -23,18 +22,7 @@ public class Supplier extends GenericEntitys {
     @Column(nullable = false)
     protected String contactName;
 
-    public Supplier(String name,
-                    String phone,
-                    String contactName,
-                    String email,
-                    String address,
-                    String city,
-                    String state) {
-        super(name, phone, email, address, city, state);
-        this.contactName = contactName;
-}
-
-        @Override
+    @Override
     public String toString() {
         return "Nome: " + name +
                 "/n Telefone: " +  phone +

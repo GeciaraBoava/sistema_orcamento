@@ -5,7 +5,7 @@ import com.geciara.orcamento.dto.UnitMeasureResponseDTO;
 import com.geciara.orcamento.dto.UnitMeasureUpdateRequestDTO;
 import com.geciara.orcamento.exceptions.ItemNotFoundException;
 import com.geciara.orcamento.mapper.UnitMeasureMapper;
-import com.geciara.orcamento.model.entitys.UnitMeasure;
+import com.geciara.orcamento.model.entitys.UnitMeasureEntity;
 import com.geciara.orcamento.repository.UnitMeasureRepository;
 import org.springframework.stereotype.Service;
 
@@ -24,7 +24,7 @@ public class UnitMeasureService {
     }
 
     public UnitMeasureResponseDTO save(UnitMeasureRequestDTO dto) {
-        UnitMeasure unitMeasure = unitMeasureMapper.toUnitMeasureEntity(dto);
+        UnitMeasureEntity unitMeasure = unitMeasureMapper.toUnitMeasureEntity(dto);
         unitMeasure = unitMeasureRepository.save(unitMeasure);
         return unitMeasureMapper.toResponseDTO(unitMeasure);
     }
@@ -37,15 +37,15 @@ public class UnitMeasureService {
     }
 
     public UnitMeasureResponseDTO findById(Long id) {
-        UnitMeasure unitMeasure = unitMeasureRepository.findById(id)
+        UnitMeasureEntity unitMeasure = unitMeasureRepository.findById(id)
                 .orElseThrow(ItemNotFoundException::new);
         return unitMeasureMapper.toResponseDTO(unitMeasure);
     }
 
     public UnitMeasureResponseDTO update(Long id, UnitMeasureUpdateRequestDTO dto) {
-        UnitMeasure unitMeasure = unitMeasureRepository.findById(id)
+        UnitMeasureEntity unitMeasure = unitMeasureRepository.findById(id)
                 .orElseThrow(ItemNotFoundException::new);
-        UnitMeasure updatedUnitMeasure = unitMeasureMapper.updateEntityFromDTO(dto, unitMeasure);
+        UnitMeasureEntity updatedUnitMeasure = unitMeasureMapper.updateEntityFromDTO(dto, unitMeasure);
         unitMeasureRepository.save(updatedUnitMeasure);
         return unitMeasureMapper.toResponseDTO(updatedUnitMeasure);
     }

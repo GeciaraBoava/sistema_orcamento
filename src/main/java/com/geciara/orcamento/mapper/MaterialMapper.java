@@ -4,10 +4,10 @@ import com.geciara.orcamento.dto.MaterialRequestDTO;
 import com.geciara.orcamento.dto.MaterialResponseDTO;
 import com.geciara.orcamento.dto.MaterialUpdateRequestDTO;
 import com.geciara.orcamento.exceptions.ItemNotFoundException;
-import com.geciara.orcamento.model.entitys.Material;
-import com.geciara.orcamento.model.entitys.MaterialType;
-import com.geciara.orcamento.model.entitys.PriceHistory;
-import com.geciara.orcamento.model.entitys.UnitMeasure;
+import com.geciara.orcamento.model.entitys.MaterialEntity;
+import com.geciara.orcamento.model.entitys.MaterialTypeEntity;
+import com.geciara.orcamento.model.entitys.PriceHistoryEntity;
+import com.geciara.orcamento.model.entitys.UnitMeasureEntity;
 import com.geciara.orcamento.repository.MaterialTypeRepository;
 import com.geciara.orcamento.repository.UnitMeasureRepository;
 import org.springframework.stereotype.Component;
@@ -27,26 +27,26 @@ public class MaterialMapper {
     }
 
 
-    public Material toMaterialEntity(MaterialRequestDTO dto) {
+    public MaterialEntity toMaterialEntity(MaterialRequestDTO dto) {
 
-        Material material = new Material();
+        MaterialEntity material = new MaterialEntity();
 
         material.setDescription(dto.getDescription());
         material.setCurrentPrice(dto.getCurrentPrice());
         material.setRegisteredAt(LocalDateTime.now());
         material.setActive(true);
 
-        MaterialType materialType = materialTypeRepository.findByDescription(dto.getMaterialTypeDescription())
+        MaterialTypeEntity materialType = materialTypeRepository.findByDescription(dto.getMaterialTypeDescription())
                         .orElseThrow(ItemNotFoundException::new);
 
         material.setMaterialType(materialType);
 
-        UnitMeasure unitMeasure = unitMeasureRepository.findByDescription(dto.getUnitMeasureDescription())
+        UnitMeasureEntity unitMeasure = unitMeasureRepository.findByDescription(dto.getUnitMeasureDescription())
                         .orElseThrow(ItemNotFoundException::new);
 
         material.setUnitMeasure(unitMeasure);
 
-        PriceHistory priceHistory = new PriceHistory();
+        PriceHistoryEntity priceHistory = new PriceHistoryEntity();
         priceHistory.setMaterial(material);
         priceHistory.setPrice(material.getCurrentPrice());
         priceHistory.setRegisteredAt(material.getRegisteredAt());
@@ -55,14 +55,14 @@ public class MaterialMapper {
         return material;
     }
 
-    public Material updateEntityFromDTO(MaterialUpdateRequestDTO dto,
-                                    Material material) {
+    public MaterialEntity updateEntityFromDTO(MaterialUpdateRequestDTO dto,
+                                              MaterialEntity material) {
         if(dto.getDescription() != null) material.setDescription(dto.getDescription());
         if(dto.getIsActive() != null) material.setActive(dto.getIsActive());
         material.setUpdatedAt(LocalDateTime.now());
 
         if(dto.getMaterialTypeDescription() != null) {
-            MaterialType materialType = materialTypeRepository.findByDescription(dto.getMaterialTypeDescription())
+            MaterialTypeEntity materialType = materialTypeRepository.findByDescription(dto.getMaterialTypeDescription())
                     .orElseThrow(ItemNotFoundException::new);
 
             material.setMaterialType(materialType);
@@ -70,7 +70,7 @@ public class MaterialMapper {
 
         if(dto.getUnitMeasureDescription() != null) {
 
-            UnitMeasure unitMeasure = unitMeasureRepository.findByDescription(dto.getUnitMeasureDescription())
+            UnitMeasureEntity unitMeasure = unitMeasureRepository.findByDescription(dto.getUnitMeasureDescription())
                     .orElseThrow(ItemNotFoundException::new);
 
             material.setUnitMeasure(unitMeasure);
@@ -79,7 +79,7 @@ public class MaterialMapper {
         if(dto.getCurrentPrice() != null) {
             material.setCurrentPrice(dto.getCurrentPrice());
 
-            PriceHistory newPriceHistory = new PriceHistory();
+            PriceHistoryEntity newPriceHistory = new PriceHistoryEntity();
             newPriceHistory.setMaterial(material);
             newPriceHistory.setPrice(dto.getCurrentPrice());
             newPriceHistory.setRegisteredAt(material.getRegisteredAt());
@@ -92,20 +92,22 @@ public class MaterialMapper {
 
     }
 
-    public MaterialResponseDTO toResponseDTO(Material material) {
+    public MaterialResponseDTO toResponseDTO(MaterialEntity material) {
         MaterialResponseDTO dto = new MaterialResponseDTO();
 
         dto.setId(material.getId());
         dto.setDescription(material.getDescription());
         dto.setCurrentPrice(material.getCurrentPrice());
         dto.setActive(material.isActive());
+        dto.setCreatedBy(material.getCreatedBy());
+        dto.setUpdatedBy(material.getUpdatedBy());
         dto.setRegisteredAt(material.getRegisteredAt());
         dto.setUpdatedAt(material.getUpdatedAt());
 
-        MaterialType materialType = material.getMaterialType();
+        MaterialTypeEntity materialType = material.getMaterialType();
         dto.setMaterialTypeDescription(materialType.getDescription());
 
-        UnitMeasure unitMeasure = material.getUnitMeasure();
+        UnitMeasureEntity unitMeasure = material.getUnitMeasure();
         dto.setUnitMeasureDescription(unitMeasure.getDescription());
 
         return dto;

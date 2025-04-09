@@ -1,19 +1,18 @@
 package com.geciara.orcamento.model.entitys;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDateTime;
-
+@EqualsAndHashCode(callSuper = true)
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
 @Table(name = "material_type")
-public class MaterialType {
+public class MaterialTypeEntity extends BaseEntityAudit {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "material_type_seq")
@@ -26,15 +25,4 @@ public class MaterialType {
     @Column(nullable = false)
     private boolean isActive;
 
-    @JsonFormat(pattern = "dd/MM/yyyy")
-    @Column(nullable = false, updatable = false)
-    protected LocalDateTime registeredAt;
-
-    @JsonFormat(pattern = "dd/MM/yyyy")
-    protected LocalDateTime updatedAt;
-
-
-    public MaterialType(String descricao) {
-        this.description = descricao;
-    }
 }

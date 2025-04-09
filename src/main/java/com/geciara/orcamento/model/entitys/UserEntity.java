@@ -7,6 +7,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -22,7 +24,7 @@ import java.util.List;
 @Entity(name = "users")
 @Table(name = "users")
 @EqualsAndHashCode(callSuper = true)
-public class User extends GenericEntitys implements UserDetails {
+public class UserEntity extends GenericEntitys implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "users_seq")
@@ -39,22 +41,24 @@ public class User extends GenericEntitys implements UserDetails {
     @Column(nullable = false)
     private UserRole role;
 
+    @CreatedDate
     @JsonFormat(pattern = "dd/MM/yyyy")
     @Column(nullable = false, updatable = false)
     protected LocalDateTime registeredAt;
 
+    @LastModifiedDate
     @JsonFormat(pattern = "dd/MM/yyyy")
     protected LocalDateTime updatedAt;
 
-    public User(String name,
-                String login,
-                String phone,
-                String email,
-                String address,
-                String city,
-                String state,
-                String password,
-                UserRole role) {
+    public UserEntity(String name,
+                      String login,
+                      String phone,
+                      String email,
+                      String address,
+                      String city,
+                      String state,
+                      String password,
+                      UserRole role) {
         super(name, phone, email, address, city, state);
         this.login = login;
         this.password = password;

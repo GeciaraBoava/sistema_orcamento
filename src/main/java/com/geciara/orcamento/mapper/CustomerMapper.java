@@ -3,16 +3,16 @@ package com.geciara.orcamento.mapper;
 import com.geciara.orcamento.dto.CustomerRequestDTO;
 import com.geciara.orcamento.dto.CustomerResponseDTO;
 import com.geciara.orcamento.dto.CustomerUpdateRequestDTO;
-import com.geciara.orcamento.model.entitys.Customer;
+import com.geciara.orcamento.model.entitys.CustomerEntity;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
 
 @Component
 public class CustomerMapper {
-    public Customer toCustomerEntity(CustomerRequestDTO dto) {
+    public CustomerEntity toCustomerEntity(CustomerRequestDTO dto) {
 
-        Customer customer = new Customer();
+        CustomerEntity customer = new CustomerEntity();
 
         customer.setName(dto.getName());
         customer.setPhone(dto.getPhone());
@@ -28,8 +28,8 @@ public class CustomerMapper {
         return customer;
     }
 
-    public Customer updateEntityFromDTO(CustomerUpdateRequestDTO dto,
-                                    Customer customer) {
+    public CustomerEntity updateEntityFromDTO(CustomerUpdateRequestDTO dto,
+                                              CustomerEntity customer) {
         if(dto.getName() != null) customer.setName(dto.getName());
         if(dto.getPhone() != null) customer.setPhone(dto.getPhone());
         if(dto.getContactName() != null) customer.setContactName(dto.getContactName());
@@ -44,7 +44,7 @@ public class CustomerMapper {
         return customer;
     }
 
-    public CustomerResponseDTO toResponseDTO(Customer customer) {
+    public CustomerResponseDTO toResponseDTO(CustomerEntity customer) {
         CustomerResponseDTO dto = new CustomerResponseDTO();
 
         dto.setId(customer.getId());
@@ -57,6 +57,8 @@ public class CustomerMapper {
         dto.setState(customer.getState());
         dto.setCustomerType(customer.getCustomerType());
         dto.setActive(customer.isActive());
+        dto.setCreatedBy(customer.getCreatedBy());
+        dto.setUpdatedBy(customer.getUpdatedBy());
         dto.setRegisteredAt(customer.getRegisteredAt());
         dto.setUpdatedAt(customer.getUpdatedAt());
 

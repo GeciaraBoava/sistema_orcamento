@@ -23,10 +23,8 @@ public class UserResponseDTO {
     private String state;
     private UserRole role;
     private boolean isActive;
-
-    @JsonFormat(pattern = "dd/MM/yyyy HH:mm:ss")
+    private String createdBy;
+    private String updatedBy;
     private LocalDateTime registeredAt;
-
-    @JsonFormat(pattern = "dd/MM/yyyy HH:mm:ss")
     private LocalDateTime updatedAt;
 }

@@ -5,7 +5,7 @@ import com.geciara.orcamento.dto.MaterialResponseDTO;
 import com.geciara.orcamento.dto.MaterialUpdateRequestDTO;
 import com.geciara.orcamento.exceptions.ItemNotFoundException;
 import com.geciara.orcamento.mapper.MaterialMapper;
-import com.geciara.orcamento.model.entitys.Material;
+import com.geciara.orcamento.model.entitys.MaterialEntity;
 import com.geciara.orcamento.repository.MaterialRepository;
 import org.springframework.stereotype.Service;
 
@@ -24,7 +24,7 @@ public class MaterialService {
     }
 
     public MaterialResponseDTO save(MaterialRequestDTO dto) {
-        Material material = materialMapper.toMaterialEntity(dto);
+        MaterialEntity material = materialMapper.toMaterialEntity(dto);
         material = materialRepository.save(material);
         return materialMapper.toResponseDTO(material);
     }
@@ -37,15 +37,15 @@ public class MaterialService {
     }
 
     public MaterialResponseDTO findById(Long id) {
-        Material material = materialRepository.findById(id)
+        MaterialEntity material = materialRepository.findById(id)
                 .orElseThrow(ItemNotFoundException::new);
         return materialMapper.toResponseDTO(material);
     }
 
     public MaterialResponseDTO update(Long id, MaterialUpdateRequestDTO dto) {
-        Material material = materialRepository.findById(id)
+        MaterialEntity material = materialRepository.findById(id)
                 .orElseThrow(ItemNotFoundException::new);
-        Material updatedMaterial = materialMapper.updateEntityFromDTO(dto, material);
+        MaterialEntity updatedMaterial = materialMapper.updateEntityFromDTO(dto, material);
         materialRepository.save(updatedMaterial);
         return materialMapper.toResponseDTO(updatedMaterial);
     }

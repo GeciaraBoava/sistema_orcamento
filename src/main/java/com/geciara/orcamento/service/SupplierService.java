@@ -5,7 +5,7 @@ import com.geciara.orcamento.dto.SupplierResponseDTO;
 import com.geciara.orcamento.dto.SupplierUpdateRequestDTO;
 import com.geciara.orcamento.exceptions.ItemNotFoundException;
 import com.geciara.orcamento.mapper.SupplierMapper;
-import com.geciara.orcamento.model.entitys.Supplier;
+import com.geciara.orcamento.model.entitys.SupplierEntity;
 import com.geciara.orcamento.repository.SupplierRepository;
 import org.springframework.stereotype.Service;
 
@@ -25,7 +25,7 @@ public class SupplierService {
 
 
     public SupplierResponseDTO save(SupplierRequestDTO dto) {
-        Supplier supplier = supplierMapper.toSupplierEntity(dto);
+        SupplierEntity supplier = supplierMapper.toSupplierEntity(dto);
         supplier = supplierRepository.save(supplier);
         return supplierMapper.toResponseDTO(supplier);
     }
@@ -38,15 +38,15 @@ public class SupplierService {
     }
 
     public SupplierResponseDTO findById(Long id) {
-        Supplier supplier = supplierRepository.findById(id)
+        SupplierEntity supplier = supplierRepository.findById(id)
                 .orElseThrow(ItemNotFoundException::new);
         return supplierMapper.toResponseDTO(supplier);
     }
 
     public SupplierResponseDTO update(Long id, SupplierUpdateRequestDTO dto) {
-        Supplier supplier = supplierRepository.findById(id)
+        SupplierEntity supplier = supplierRepository.findById(id)
                 .orElseThrow(ItemNotFoundException::new);
-        Supplier updatedSupplier = supplierMapper.updateEntityFromDTO(dto, supplier);
+        SupplierEntity updatedSupplier = supplierMapper.updateEntityFromDTO(dto, supplier);
         supplierRepository.save(updatedSupplier);
         return supplierMapper.toResponseDTO(updatedSupplier);
     }

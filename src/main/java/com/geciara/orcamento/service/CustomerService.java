@@ -5,7 +5,7 @@ import com.geciara.orcamento.dto.CustomerResponseDTO;
 import com.geciara.orcamento.dto.CustomerUpdateRequestDTO;
 import com.geciara.orcamento.exceptions.ItemNotFoundException;
 import com.geciara.orcamento.mapper.CustomerMapper;
-import com.geciara.orcamento.model.entitys.Customer;
+import com.geciara.orcamento.model.entitys.CustomerEntity;
 import com.geciara.orcamento.repository.CustomerRepository;
 import org.springframework.stereotype.Service;
 
@@ -24,7 +24,7 @@ public class CustomerService {
     }
 
     public CustomerResponseDTO save(CustomerRequestDTO dto) {
-        Customer customer = customerMapper.toCustomerEntity(dto);
+        CustomerEntity customer = customerMapper.toCustomerEntity(dto);
         customer = customerRepository.save(customer);
         return customerMapper.toResponseDTO(customer);
     }
@@ -37,15 +37,15 @@ public class CustomerService {
     }
 
     public CustomerResponseDTO findById(Long id) {
-        Customer customer = customerRepository.findById(id)
+        CustomerEntity customer = customerRepository.findById(id)
                 .orElseThrow(ItemNotFoundException::new);
         return customerMapper.toResponseDTO(customer);
     }
 
     public CustomerResponseDTO update(Long id, CustomerUpdateRequestDTO dto) {
-        Customer customer = customerRepository.findById(id)
+        CustomerEntity customer = customerRepository.findById(id)
                 .orElseThrow(ItemNotFoundException::new);
-        Customer updatedCustomer = customerMapper.updateEntityFromDTO(dto, customer);
+        CustomerEntity updatedCustomer = customerMapper.updateEntityFromDTO(dto, customer);
         customerRepository.save(updatedCustomer);
         return customerMapper.toResponseDTO(updatedCustomer);
     }

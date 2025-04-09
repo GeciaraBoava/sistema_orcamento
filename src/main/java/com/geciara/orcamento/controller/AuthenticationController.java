@@ -4,7 +4,7 @@ import com.geciara.orcamento.config.TokenService;
 import com.geciara.orcamento.dto.AuthenticationDTO;
 
 import com.geciara.orcamento.dto.LoginResponseDTO;
-import com.geciara.orcamento.model.entitys.User;
+import com.geciara.orcamento.model.entitys.UserEntity;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -41,7 +41,7 @@ public class AuthenticationController {
         //autenticação - verifica se o 'login' e senha fornecidos estão corretos
         var auth = this.authenticationManager.authenticate(usernamePassword);
 
-        var token = tokenService.generateToken((User) auth.getPrincipal());
+        var token = tokenService.generateToken((UserEntity) auth.getPrincipal());
 
         return ResponseEntity.ok(new LoginResponseDTO(token));
     }

@@ -5,6 +5,8 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.CreatedBy;
+import org.springframework.data.annotation.CreatedDate;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -14,7 +16,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @Entity
 @Table(name = "price_history")
-public class PriceHistory {
+public class PriceHistoryEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "price_history_seq")
@@ -23,19 +25,17 @@ public class PriceHistory {
 
     @ManyToOne
     @JoinColumn(name = "material_id", nullable = false)
-    private Material material;
+    private MaterialEntity material;
 
     @Column(nullable = false, precision = 10, scale = 2)
     private BigDecimal price;
 
+    @CreatedBy
+    @Column(updatable = false)
+    protected String createdBy;
+
+    @CreatedDate
     @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDateTime registeredAt;
 
-    public PriceHistory(
-           Material material, BigDecimal price) {
-
-        this.material = material;
-        this.price = price;
-
-    }
 }

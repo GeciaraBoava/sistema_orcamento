@@ -5,7 +5,7 @@ import com.geciara.orcamento.dto.UserResponseDTO;
 import com.geciara.orcamento.dto.UserUpdateRequestDTO;
 import com.geciara.orcamento.exceptions.ItemNotFoundException;
 import com.geciara.orcamento.mapper.UserMapper;
-import com.geciara.orcamento.model.entitys.User;
+import com.geciara.orcamento.model.entitys.UserEntity;
 import com.geciara.orcamento.repository.UserRepository;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -27,7 +27,7 @@ public class UserService {
     }
 
     public UserResponseDTO save(UserRequestDTO dto) {
-        User user = userMapper.toUserEntity(dto);
+        UserEntity user = userMapper.toUserEntity(dto);
         user = userRepository.save(user);
         return userMapper.toResponseDTO(user);
     }
@@ -40,15 +40,15 @@ public class UserService {
     }
 
     public UserResponseDTO findById(Long id) {
-        User user = userRepository.findById(id)
+        UserEntity user = userRepository.findById(id)
                 .orElseThrow(ItemNotFoundException::new);
         return userMapper.toResponseDTO(user);
     }
 
     public UserResponseDTO update(Long id, UserUpdateRequestDTO dto) {
-        User user = userRepository.findById(id)
+        UserEntity user = userRepository.findById(id)
                 .orElseThrow(ItemNotFoundException::new);
-        User updatedUser = userMapper.updateEntityFromDTO(dto, user);
+        UserEntity updatedUser = userMapper.updateEntityFromDTO(dto, user);
         userRepository.save(updatedUser);
         return userMapper.toResponseDTO(updatedUser);
     }
@@ -61,7 +61,7 @@ public class UserService {
     }
 
     public void updatePassword(Long id, String novaSenha) {
-        User user = userRepository.findById(id)
+        UserEntity user = userRepository.findById(id)
                 .orElseThrow(() -> new ItemNotFoundException("Usuário não encontrado"));
         user.setPassword(passwordEncoder.encode(novaSenha));
         userRepository.save(user);

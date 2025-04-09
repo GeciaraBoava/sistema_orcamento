@@ -3,7 +3,7 @@ package com.geciara.orcamento.mapper;
 import com.geciara.orcamento.dto.UserRequestDTO;
 import com.geciara.orcamento.dto.UserResponseDTO;
 import com.geciara.orcamento.dto.UserUpdateRequestDTO;
-import com.geciara.orcamento.model.entitys.User;
+import com.geciara.orcamento.model.entitys.UserEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
@@ -18,9 +18,9 @@ public class UserMapper {
         this.passwordEncoder = passwordEncoder;
     }
 
-    public User toUserEntity(UserRequestDTO dto) {
+    public UserEntity toUserEntity(UserRequestDTO dto) {
 
-        User user = new User();
+        UserEntity user = new UserEntity();
 
         user.setName(dto.getName());
         user.setLogin(dto.getLogin());
@@ -37,8 +37,8 @@ public class UserMapper {
         return user;
     }
 
-    public User updateEntityFromDTO(UserUpdateRequestDTO dto,
-                                        User user) {
+    public UserEntity updateEntityFromDTO(UserUpdateRequestDTO dto,
+                                          UserEntity user) {
         if(dto.getName() != null) user.setName(dto.getName());
         if(dto.getLogin() != null) user.setLogin(dto.getLogin());
         if(dto.getPassword() != null) user.setPassword(passwordEncoder.encode(dto.getPassword()));
@@ -54,7 +54,7 @@ public class UserMapper {
         return user;
     }
 
-    public UserResponseDTO toResponseDTO(User user) {
+    public UserResponseDTO toResponseDTO(UserEntity user) {
         UserResponseDTO dto = new UserResponseDTO();
 
         dto.setId(user.getId());
@@ -67,6 +67,8 @@ public class UserMapper {
         dto.setState(user.getState());
         dto.setRole(user.getRole());
         dto.setActive(user.isActive());
+        dto.setCreatedBy(user.getCreatedBy());
+        dto.setUpdatedBy(user.getUpdatedBy());
         dto.setRegisteredAt(user.getRegisteredAt());
         dto.setUpdatedAt(user.getUpdatedAt());
 

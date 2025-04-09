@@ -1,20 +1,23 @@
 package com.geciara.orcamento.model.entitys;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
-import java.time.LocalDateTime;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
+
+@EqualsAndHashCode(callSuper = true)
 @Data
 @SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
 @MappedSuperclass
-public abstract class GenericEntitys {
+@EntityListeners(AuditingEntityListener.class)
+public abstract class GenericEntitys extends BaseEntityAudit{
 
     @Column(unique = true, nullable = false)
     protected String name;
@@ -36,13 +39,6 @@ public abstract class GenericEntitys {
 
     @Column(nullable = false)
     protected boolean isActive;
-
-    @JsonFormat(pattern = "dd/MM/yyyy")
-    @Column(nullable = false, updatable = false)
-    protected LocalDateTime registeredAt;
-
-    @JsonFormat(pattern = "dd/MM/yyyy")
-    protected LocalDateTime updatedAt;
 
     public GenericEntitys(String name,
                           String phone,
