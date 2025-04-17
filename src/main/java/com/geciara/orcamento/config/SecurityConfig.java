@@ -28,18 +28,21 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
         httpSecurity
-                //desabilita a proteção contra CSRF por se tratar de uma API REST que usa JWT
+
                 .csrf(AbstractHttpConfigurer::disable)
-                //política de criação de sessão no modo stateless (via 'token')
-                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                .oauth2ResourceServer(oauth2 -> oauth2.jwt(Customizer.withDefaults()))
+                .sessionManagement(session -> session.sessionCreationPolicy(
+                        SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/api/users/**").hasAuthority("ROLE_ADMIN")
                         .requestMatchers("/auth/login").permitAll()
                         .requestMatchers("/v3/api-docs/**", "/swagger-ui/**", "/swagger-ui.html").permitAll()
                         .anyRequest().authenticated()
                 )
-                //chama o filtro de sergurança antes da autenticação do username
-                .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class);
+
+                .addFilterBefore(
+                        securityFilter,
+                        UsernamePasswordAuthenticationFilter.class);
 
         return httpSecurity.build();
     }

@@ -62,6 +62,8 @@ public class UserServiceTest {
                 "PR",
                 ADMIN,
                 true,
+                "admin",
+                null,
                 LocalDateTime.now(),
                 LocalDateTime.now()
         );
@@ -125,6 +127,8 @@ public class UserServiceTest {
                 "PR",
                 ADMIN,
                 true,
+                "admin",
+                "admin",
                 LocalDateTime.now(),
                 LocalDateTime.now()
         );
