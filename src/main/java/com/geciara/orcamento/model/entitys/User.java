@@ -5,6 +5,10 @@ import com.geciara.orcamento.model.enums.UserRole;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+<<<<<<< HEAD
+=======
+import lombok.EqualsAndHashCode;
+>>>>>>> 7fafd5efd6d2e5915f0fa6fd103be68ee248bae4
 import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -20,7 +24,12 @@ import java.util.List;
 @NoArgsConstructor
 @Entity(name = "users")
 @Table(name = "users")
+<<<<<<< HEAD
 public class User implements UserDetails {
+=======
+@EqualsAndHashCode(callSuper = true)
+public class User extends GenericEntitys implements UserDetails {
+>>>>>>> 7fafd5efd6d2e5915f0fa6fd103be68ee248bae4
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "users_seq")
@@ -37,6 +46,7 @@ public class User implements UserDetails {
     @Column(nullable = false)
     private UserRole role;
 
+<<<<<<< HEAD
     @Column(unique = true, nullable = false)
     protected String name;
 
@@ -58,6 +68,8 @@ public class User implements UserDetails {
     @Column(nullable = false)
     protected boolean isActive;
 
+=======
+>>>>>>> 7fafd5efd6d2e5915f0fa6fd103be68ee248bae4
     @JsonFormat(pattern = "dd/MM/yyyy")
     @Column(nullable = false, updatable = false)
     protected LocalDateTime registeredAt;
@@ -65,6 +77,24 @@ public class User implements UserDetails {
     @JsonFormat(pattern = "dd/MM/yyyy")
     protected LocalDateTime updatedAt;
 
+<<<<<<< HEAD
+=======
+    public User(String name,
+                String login,
+                String phone,
+                String email,
+                String address,
+                String city,
+                String state,
+                String password,
+                UserRole role) {
+        super(name, phone, email, address, city, state);
+        this.login = login;
+        this.password = password;
+        this.role = role;
+    }
+
+>>>>>>> 7fafd5efd6d2e5915f0fa6fd103be68ee248bae4
     @Override
     public String toString() {
         return "Nome: " + name +

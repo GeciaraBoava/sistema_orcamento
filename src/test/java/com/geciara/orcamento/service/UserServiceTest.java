@@ -3,6 +3,7 @@ package com.geciara.orcamento.service;
 import com.geciara.orcamento.dto.UserRequestDTO;
 import com.geciara.orcamento.dto.UserResponseDTO;
 import com.geciara.orcamento.dto.UserUpdateRequestDTO;
+<<<<<<< HEAD
 import com.geciara.orcamento.exceptions.EmailAlreadyExistsException;
 import com.geciara.orcamento.exceptions.UserNotFoundException;
 import com.geciara.orcamento.mapper.UserMapper;
@@ -19,12 +20,24 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.time.LocalDateTime;
 import java.util.Optional;
+=======
+import com.geciara.orcamento.mapper.UserMapper;
+import com.geciara.orcamento.model.entitys.User;
+import com.geciara.orcamento.repository.UserRepository;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+
+import java.time.LocalDateTime;
+>>>>>>> 7fafd5efd6d2e5915f0fa6fd103be68ee248bae4
 
 import static com.geciara.orcamento.model.enums.UserRole.ADMIN;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
+<<<<<<< HEAD
 @ExtendWith(MockitoExtension.class)
+=======
+>>>>>>> 7fafd5efd6d2e5915f0fa6fd103be68ee248bae4
 public class UserServiceTest {
 
     @Mock
@@ -36,6 +49,7 @@ public class UserServiceTest {
     @InjectMocks
     private UserService userService;
 
+<<<<<<< HEAD
     private User user;
     private final LocalDateTime fixedTime = LocalDateTime.of(2025, 1, 1, 12, 0);
 
@@ -87,6 +101,46 @@ public class UserServiceTest {
             true,
             fixedTime,
             fixedTime
+=======
+    void testSaveUser() {
+
+        UserRequestDTO requestDTO = new UserRequestDTO(
+                "GeciaraBoava",
+                "Geciara Boava",
+                "000000009",
+                "geciara@gmail.com",
+                "Rua Fulano de tal",
+                "Curitiba",
+                "PR",
+                ADMIN
+        );
+
+        User user = new User(
+                "Geciara Boava",
+                "GeciaraBoava",
+                "000000009",
+                "geciara@gmail.com",
+                "Rua Fulano de Tal",
+                "Curitiba",
+                "PR",
+                "123456",
+                ADMIN
+        );
+
+        UserResponseDTO responseDTO = new UserResponseDTO(
+                1L,
+                "Geciara Boava",
+                "GeciaraBoava",
+                "000000009",
+                "geciara@gmail.com",
+                "Rua Fulano de Tal",
+                "Curitiba",
+                "PR",
+                ADMIN,
+                true,
+                LocalDateTime.now(),
+                LocalDateTime.now()
+>>>>>>> 7fafd5efd6d2e5915f0fa6fd103be68ee248bae4
         );
 
         when(userMapper.toUserEntity(requestDTO)).thenReturn(user);
@@ -101,7 +155,11 @@ public class UserServiceTest {
         assertEquals("GeciaraBoava", result.getLogin());
         assertEquals("000000009", result.getPhone());
         assertEquals("geciara@gmail.com", result.getEmail());
+<<<<<<< HEAD
         assertEquals("Rua Fulano de Tal", result.getAddress());
+=======
+        assertEquals("Rua Fulano de tal", result.getAddress());
+>>>>>>> 7fafd5efd6d2e5915f0fa6fd103be68ee248bae4
         assertEquals("Curitiba", result.getCity());
         assertEquals("PR", result.getState());
         assertEquals(ADMIN, result.getRole());
@@ -111,6 +169,7 @@ public class UserServiceTest {
 
     }
 
+<<<<<<< HEAD
     @Test
     void shouldUpdateUserSuccessfully() {
         UserUpdateRequestDTO updateRequestDTO = new UserUpdateRequestDTO(
@@ -139,6 +198,47 @@ public class UserServiceTest {
             true,
             fixedTime,
             fixedTime
+=======
+    void testUpdateUser() {
+        UserUpdateRequestDTO updateRequestDTO = new UserUpdateRequestDTO(
+                "Geciara Boava",
+                "GeciaraBoava",
+                "123456",
+                "000000009",
+                "geciara@gmail.com",
+                "Rua Fulano de Tal",
+                "Curitiba",
+                "PR",
+                ADMIN,
+                true
+        );
+
+        User user = new User(
+                "Geciara Boava",
+                "GeciaraBoava",
+                "000000009",
+                "geciara@gmail.com",
+                "Rua Fulano de Tal",
+                "Curitiba",
+                "PR",
+                "123456",
+                ADMIN
+        );
+
+        UserResponseDTO responseDTO = new UserResponseDTO(
+                1L,
+                "Geciara Boava",
+                "GeciaraBoava",
+                "000000009",
+                "geciara@gmail.com",
+                "Rua Fulano de Tal",
+                "Curitiba",
+                "PR",
+                ADMIN,
+                true,
+                LocalDateTime.now(),
+                LocalDateTime.now()
+>>>>>>> 7fafd5efd6d2e5915f0fa6fd103be68ee248bae4
         );
 
         when(userMapper.updateEntityFromDTO(updateRequestDTO, user)).thenReturn(user);
@@ -161,6 +261,7 @@ public class UserServiceTest {
         verify(userRepository, times(1)).save(user);
         verify(userMapper, times(1)).toResponseDTO(user);
     }
+<<<<<<< HEAD
 
     @Test
     void shouldThrowExceptionWhenEmailAlreadyExistsOnSave() {
@@ -229,4 +330,6 @@ public class UserServiceTest {
         assertThrows(ConstraintViolationException.class, () -> userService.save(requestDTO));
     }
 
+=======
+>>>>>>> 7fafd5efd6d2e5915f0fa6fd103be68ee248bae4
 }

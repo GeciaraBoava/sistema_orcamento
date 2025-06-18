@@ -50,7 +50,11 @@ public class SecurityConfig {
     }
 
     @Bean
+<<<<<<< HEAD
     public BCryptPasswordEncoder passwordEncoder() {
+=======
+    public PasswordEncoder passwordEncoder() {
+>>>>>>> 7fafd5efd6d2e5915f0fa6fd103be68ee248bae4
         return new BCryptPasswordEncoder();
     }
 }

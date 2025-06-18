@@ -3,7 +3,10 @@ package com.geciara.orcamento.service;
 import com.geciara.orcamento.dto.UserRequestDTO;
 import com.geciara.orcamento.dto.UserResponseDTO;
 import com.geciara.orcamento.dto.UserUpdateRequestDTO;
+<<<<<<< HEAD
 import com.geciara.orcamento.exceptions.EmailAlreadyExistsException;
+=======
+>>>>>>> 7fafd5efd6d2e5915f0fa6fd103be68ee248bae4
 import com.geciara.orcamento.exceptions.ItemNotFoundException;
 import com.geciara.orcamento.mapper.UserMapper;
 import com.geciara.orcamento.model.entitys.User;
@@ -28,11 +31,14 @@ public class UserService {
     }
 
     public UserResponseDTO save(UserRequestDTO dto) {
+<<<<<<< HEAD
 
         if (userRepository.existsByEmail(dto.getEmail())) {
             throw new EmailAlreadyExistsException("Email já está em uso.");
         }
 
+=======
+>>>>>>> 7fafd5efd6d2e5915f0fa6fd103be68ee248bae4
         User user = userMapper.toUserEntity(dto);
         user = userRepository.save(user);
         return userMapper.toResponseDTO(user);

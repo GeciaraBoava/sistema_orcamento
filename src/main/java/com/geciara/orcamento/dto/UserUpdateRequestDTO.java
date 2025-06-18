@@ -1,6 +1,9 @@
 package com.geciara.orcamento.dto;
 
+<<<<<<< HEAD
 import com.fasterxml.jackson.annotation.JsonIgnore;
+=======
+>>>>>>> 7fafd5efd6d2e5915f0fa6fd103be68ee248bae4
 import com.geciara.orcamento.model.enums.UserRole;
 import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
@@ -15,8 +18,11 @@ public class UserUpdateRequestDTO {
 
     private String name;
     private String login;
+<<<<<<< HEAD
 
     @JsonIgnore
+=======
+>>>>>>> 7fafd5efd6d2e5915f0fa6fd103be68ee248bae4
     private String password;
     private String phone;
 
