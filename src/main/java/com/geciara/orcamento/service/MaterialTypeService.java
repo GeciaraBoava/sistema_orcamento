@@ -23,7 +23,7 @@ public class MaterialTypeService {
         this.materialTypeMapper = materialTypeMapper;
     }
     public MaterialTypeResponseDTO save(MaterialTypeRequestDTO dto) {
-        MaterialType materialType = materialTypeMapper.toMaterialTypeEntity(dto);
+        MaterialType materialType = materialTypeMapper.toEntity(dto);
         materialType = materialTypeRepository.save(materialType);
         return materialTypeMapper.toResponseDTO(materialType);
     }
@@ -41,10 +41,15 @@ public class MaterialTypeService {
         return materialTypeMapper.toResponseDTO(materialType);
     }
 
+    public MaterialType findMaterialTypeById(Long id) {
+        return materialTypeRepository.findById(id)
+                .orElseThrow(ItemNotFoundException::new);
+    }
+
     public MaterialTypeResponseDTO update(Long id, MaterialTypeUpdateRequestDTO dto) {
         MaterialType materialType = materialTypeRepository.findById(id)
                 .orElseThrow(ItemNotFoundException::new);
-        MaterialType updatedMaterialType = materialTypeMapper.updateEntityFromDTO(dto, materialType);
+        MaterialType updatedMaterialType = materialTypeMapper.updateFromDTO(dto, materialType);
         materialTypeRepository.save(updatedMaterialType);
         return materialTypeMapper.toResponseDTO(updatedMaterialType);
     }

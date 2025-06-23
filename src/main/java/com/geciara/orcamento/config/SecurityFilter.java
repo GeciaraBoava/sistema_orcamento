@@ -33,7 +33,7 @@ public class SecurityFilter extends OncePerRequestFilter {
             var login = tokenService.validateToken(token);
 
             //encontra o user referente ao login validado
-            UserDetails user = userRepository.findByLogin(login);
+            UserDetails user = userRepository.findByUsername(login);
 
             //informações necessárias para as validações dos próximos endpoints
             var  authentication = new UsernamePasswordAuthenticationToken(user, null, user.getAuthorities());

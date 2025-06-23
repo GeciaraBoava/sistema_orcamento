@@ -3,8 +3,11 @@ package com.geciara.orcamento.dto;
 import com.geciara.orcamento.model.enums.CustomerType;
 import jakarta.validation.constraints.*;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
+@Getter
+@Setter
 public class CustomerRequestDTO {
 
     @NotBlank(message = "Nome é obrigatório")

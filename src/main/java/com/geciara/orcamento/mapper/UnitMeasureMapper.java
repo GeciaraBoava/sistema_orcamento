@@ -11,7 +11,9 @@ import java.time.LocalDateTime;
 @Component
 public class UnitMeasureMapper {
 
-    public UnitMeasure toUnitMeasureEntity(UnitMeasureRequestDTO dto) {
+    public UnitMeasure toEntity(UnitMeasureRequestDTO dto) {
+
+        if (dto == null) return null;
 
         UnitMeasure unitMeasure = new UnitMeasure();
 
@@ -22,8 +24,11 @@ public class UnitMeasureMapper {
         return unitMeasure;
     }
 
-    public UnitMeasure updateEntityFromDTO(UnitMeasureUpdateRequestDTO dto,
-                                            UnitMeasure unitMeasure) {
+    public UnitMeasure updateFromDTO(UnitMeasureUpdateRequestDTO dto,
+                                     UnitMeasure unitMeasure) {
+
+        if (dto == null) return null;
+
         if(dto.getDescription() != null) unitMeasure.setDescription(dto.getDescription());
         if(dto.getIsActive() != null) unitMeasure.setActive(dto.getIsActive());
         unitMeasure.setUpdatedAt(LocalDateTime.now());
@@ -42,7 +47,5 @@ public class UnitMeasureMapper {
 
         return dto;
     }
-
-
 
 }

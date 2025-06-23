@@ -11,10 +11,8 @@ import java.util.List;
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
 
-    UserDetails findByLogin(String login);
+    UserDetails findByUsername(String username);
     List<User> findByRole(UserRole role);
-<<<<<<< HEAD
-    boolean existsByEmail(String email);
-=======
->>>>>>> 7fafd5efd6d2e5915f0fa6fd103be68ee248bae4
+    boolean existsByCadastroEmail(String email);
+
 }

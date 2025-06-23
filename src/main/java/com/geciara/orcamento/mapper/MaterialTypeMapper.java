@@ -11,7 +11,9 @@ import java.time.LocalDateTime;
 @Component
 public class MaterialTypeMapper {
 
-    public MaterialType toMaterialTypeEntity(MaterialTypeRequestDTO dto) {
+    public MaterialType toEntity(MaterialTypeRequestDTO dto) {
+
+        if (dto == null) return null;
 
         MaterialType materialType = new MaterialType();
 
@@ -22,8 +24,11 @@ public class MaterialTypeMapper {
         return materialType;
     }
 
-    public MaterialType updateEntityFromDTO(MaterialTypeUpdateRequestDTO dto,
-                                    MaterialType materialType) {
+    public MaterialType updateFromDTO(MaterialTypeUpdateRequestDTO dto,
+                                      MaterialType materialType) {
+
+        if (dto == null) return null;
+
         if(dto.getDescription() != null) materialType.setDescription(dto.getDescription());
         if(dto.getIsActive() != null) materialType.setActive(dto.getIsActive());
         materialType.setUpdatedAt(LocalDateTime.now());

@@ -6,8 +6,7 @@
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<version>3.4.4</version>
-		<relativePath/> <!-- lookup parent from repository -->
-	</parent>
+		<relativePath/> </parent>
 	<groupId>com.geciara</groupId>
 	<artifactId>obudget_system</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
@@ -28,6 +27,7 @@
 	</scm>
 	<properties>
 		<java.version>21</java.version>
+		<mockito.version>5.2.0</mockito.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -62,6 +62,12 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
+<!--			<exclusions>-->
+<!--				<exclusion>-->
+<!--					<groupId>org.mockito</groupId>-->
+<!--					<artifactId>mockito-core</artifactId>-->
+<!--				</exclusion>-->
+<!--			</exclusions>-->
 		</dependency>
 
 		<dependency>
@@ -73,15 +79,14 @@
 		<dependency>
 			<groupId>org.mockito</groupId>
 			<artifactId>mockito-core</artifactId>
-			<scope>test</scope>
+			<version>${mockito.version}</version> <scope>test</scope>
 		</dependency>
 
-		<dependency>
-			<groupId>org.mockito</groupId>
-			<artifactId>mockito-inline</artifactId>
-			<version>5.2.0</version>
-			<scope>test</scope>
-		</dependency>
+<!--		<dependency>-->
+<!--			<groupId>org.mockito</groupId>-->
+<!--			<artifactId>mockito-inline</artifactId>-->
+<!--			<version>${mockito.version}</version> <scope>test</scope>-->
+<!--		</dependency>-->
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -111,6 +116,17 @@
 			<version>4.5.0</version>
 		</dependency>
 
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-thymeleaf</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-devtools</artifactId>
+			<optional>true</optional>
+		</dependency>
+
 
 	</dependencies>
 
@@ -122,6 +138,14 @@
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>3.2.5</version> <configuration>
+<!--				<argLine>-javaagent:${settings.localRepository}/org/mockito/mockito-inline/${mockito.version}/mockito-inline-${mockito.version}.jar</argLine>-->
+
+			</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-dependency-plugin</artifactId>
 				<executions>
 					<execution>
@@ -130,10 +154,6 @@
 						</goals>
 					</execution>
 				</executions>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-surefire-plugin</artifactId>
 			</plugin>
 		</plugins>
 	</build>

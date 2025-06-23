@@ -3,11 +3,9 @@ package com.geciara.orcamento.service;
 import com.geciara.orcamento.dto.UserRequestDTO;
 import com.geciara.orcamento.dto.UserResponseDTO;
 import com.geciara.orcamento.dto.UserUpdateRequestDTO;
-<<<<<<< HEAD
 import com.geciara.orcamento.exceptions.EmailAlreadyExistsException;
-=======
->>>>>>> 7fafd5efd6d2e5915f0fa6fd103be68ee248bae4
 import com.geciara.orcamento.exceptions.ItemNotFoundException;
+import com.geciara.orcamento.exceptions.UserNotFoundException;
 import com.geciara.orcamento.mapper.UserMapper;
 import com.geciara.orcamento.model.entitys.User;
 import com.geciara.orcamento.repository.UserRepository;
@@ -31,15 +29,10 @@ public class UserService {
     }
 
     public UserResponseDTO save(UserRequestDTO dto) {
-<<<<<<< HEAD
-
-        if (userRepository.existsByEmail(dto.getEmail())) {
+        if (userRepository.existsByCadastroEmail(dto.getEmail())) {
             throw new EmailAlreadyExistsException("Email já está em uso.");
         }
-
-=======
->>>>>>> 7fafd5efd6d2e5915f0fa6fd103be68ee248bae4
-        User user = userMapper.toUserEntity(dto);
+        User user = userMapper.toEntity(dto);
         user = userRepository.save(user);
         return userMapper.toResponseDTO(user);
     }
@@ -59,8 +52,8 @@ public class UserService {
 
     public UserResponseDTO update(Long id, UserUpdateRequestDTO dto) {
         User user = userRepository.findById(id)
-                .orElseThrow(ItemNotFoundException::new);
-        User updatedUser = userMapper.updateEntityFromDTO(dto, user);
+                .orElseThrow(UserNotFoundException::new);
+        User updatedUser = userMapper.updateFromDTO(dto, user);
         userRepository.save(updatedUser);
         return userMapper.toResponseDTO(updatedUser);
     }

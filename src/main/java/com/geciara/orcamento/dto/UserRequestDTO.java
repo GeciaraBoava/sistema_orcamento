@@ -30,7 +30,7 @@ public class UserRequestDTO {
 
     @NotBlank(message = "Estado é obrigatório")
     @Size(min = 2, max = 2, message = "Estado deve ter 2 caracteres")
-    private String state;
+    private String UF;
 
     @NotNull(message = "Tipo de acesso é obrigatório")
     private UserRole role;

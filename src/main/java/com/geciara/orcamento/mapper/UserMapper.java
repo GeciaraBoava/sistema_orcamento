@@ -18,17 +18,19 @@ public class UserMapper {
         this.passwordEncoder = passwordEncoder;
     }
 
-    public User toUserEntity(UserRequestDTO dto) {
+    public User toEntity(UserRequestDTO dto) {
+
+        if (dto == null) return null;
 
         User user = new User();
 
-        user.setName(dto.getName());
-        user.setLogin(dto.getLogin());
-        user.setPhone(dto.getPhone());
-        user.setEmail(dto.getEmail());
-        user.setAddress(dto.getAddress());
-        user.setCity(dto.getCity());
-        user.setState(dto.getState());
+        user.getRegister().setName(dto.getName());
+        user.setUsername(dto.getLogin());
+        user.getRegister().setPhone(dto.getPhone());
+        user.getRegister().setEmail(dto.getEmail());
+        user.getRegister().setAddress(dto.getAddress());
+        user.getRegister().setCity(dto.getCity());
+        user.getRegister().setUf(dto.getUF());
         user.setRole(dto.getRole());
         user.setRegisteredAt(LocalDateTime.now());
         user.setActive(true);
@@ -37,16 +39,19 @@ public class UserMapper {
         return user;
     }
 
-    public User updateEntityFromDTO(UserUpdateRequestDTO dto,
-                                        User user) {
-        if(dto.getName() != null) user.setName(dto.getName());
-        if(dto.getLogin() != null) user.setLogin(dto.getLogin());
+    public User updateFromDTO(UserUpdateRequestDTO dto,
+                              User user) {
+
+        if (dto == null) return null;
+
+        if(dto.getName() != null) user.getRegister().setName(dto.getName());
+        if(dto.getLogin() != null) user.setUsername(dto.getLogin());
         if(dto.getPassword() != null) user.setPassword(passwordEncoder.encode(dto.getPassword()));
-        if(dto.getPhone() != null) user.setPhone(dto.getPhone());
-        if(dto.getEmail() != null) user.setEmail(dto.getEmail());
-        if(dto.getAddress() != null) user.setAddress(dto.getAddress());
-        if(dto.getCity() != null) user.setCity(dto.getCity());
-        if(dto.getState() != null) user.setState(dto.getState());
+        if(dto.getPhone() != null) user.getRegister().setPhone(dto.getPhone());
+        if(dto.getEmail() != null) user.getRegister().setEmail(dto.getEmail());
+        if(dto.getAddress() != null) user.getRegister().setAddress(dto.getAddress());
+        if(dto.getCity() != null) user.getRegister().setCity(dto.getCity());
+        if(dto.getState() != null) user.getRegister().setUf(dto.getState());
         if(dto.getRole() != null) user.setRole(dto.getRole());
         if(dto.getIsActive() != null) user.setActive(dto.getIsActive());
         user.setUpdatedAt(LocalDateTime.now());
@@ -58,13 +63,13 @@ public class UserMapper {
         UserResponseDTO dto = new UserResponseDTO();
 
         dto.setId(user.getId());
-        dto.setName(user.getName());
-        dto.setLogin(user.getLogin());
-        dto.setPhone(user.getPhone());
-        dto.setEmail(user.getEmail());
-        dto.setAddress(user.getAddress());
-        dto.setCity(user.getCity());
-        dto.setState(user.getState());
+        dto.setName(user.getRegister().getName());
+        dto.setLogin(user.getUsername());
+        dto.setPhone(user.getRegister().getPhone());
+        dto.setEmail(user.getRegister().getEmail());
+        dto.setAddress(user.getRegister().getAddress());
+        dto.setCity(user.getRegister().getCity());
+        dto.setState(user.getRegister().getUf());
         dto.setRole(user.getRole());
         dto.setActive(user.isActive());
         dto.setRegisteredAt(user.getRegisteredAt());

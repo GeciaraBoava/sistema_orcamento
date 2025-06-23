@@ -24,7 +24,7 @@ public class CustomerService {
     }
 
     public CustomerResponseDTO save(CustomerRequestDTO dto) {
-        Customer customer = customerMapper.toCustomerEntity(dto);
+        Customer customer = customerMapper.toEntity(dto);
         customer = customerRepository.save(customer);
         return customerMapper.toResponseDTO(customer);
     }
@@ -42,10 +42,15 @@ public class CustomerService {
         return customerMapper.toResponseDTO(customer);
     }
 
+    public Customer findCustomerById(Long id) {
+        return customerRepository.findById(id)
+                .orElseThrow(ItemNotFoundException::new);
+    }
+
     public CustomerResponseDTO update(Long id, CustomerUpdateRequestDTO dto) {
         Customer customer = customerRepository.findById(id)
                 .orElseThrow(ItemNotFoundException::new);
-        Customer updatedCustomer = customerMapper.updateEntityFromDTO(dto, customer);
+        Customer updatedCustomer = customerMapper.updateFromDTO(dto, customer);
         customerRepository.save(updatedCustomer);
         return customerMapper.toResponseDTO(updatedCustomer);
     }

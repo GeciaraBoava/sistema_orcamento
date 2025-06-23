@@ -25,7 +25,7 @@ public class SupplierService {
 
 
     public SupplierResponseDTO save(SupplierRequestDTO dto) {
-        Supplier supplier = supplierMapper.toSupplierEntity(dto);
+        Supplier supplier = supplierMapper.toEntity(dto);
         supplier = supplierRepository.save(supplier);
         return supplierMapper.toResponseDTO(supplier);
     }
@@ -46,7 +46,7 @@ public class SupplierService {
     public SupplierResponseDTO update(Long id, SupplierUpdateRequestDTO dto) {
         Supplier supplier = supplierRepository.findById(id)
                 .orElseThrow(ItemNotFoundException::new);
-        Supplier updatedSupplier = supplierMapper.updateEntityFromDTO(dto, supplier);
+        Supplier updatedSupplier = supplierMapper.updateFromDTO(dto, supplier);
         supplierRepository.save(updatedSupplier);
         return supplierMapper.toResponseDTO(updatedSupplier);
     }

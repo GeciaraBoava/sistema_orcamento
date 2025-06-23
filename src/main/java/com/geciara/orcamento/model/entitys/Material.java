@@ -2,10 +2,9 @@ package com.geciara.orcamento.model.entitys;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.geciara.orcamento.exceptions.ItemNotFoundException;
+import com.geciara.orcamento.model.entitys.materialDetails.PriceHistory;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -17,7 +16,8 @@ import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 
-@Data
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
@@ -40,10 +40,10 @@ public class Material {
     @JoinColumn(name = "unit_measure_id", nullable = false)
     private UnitMeasure unitMeasure;
 
-    @JsonFormat(pattern = "dd/MM/yyyy")
+    @JsonFormat(pattern = "dd/MM/yyyy HH:mm:ss")
     private LocalDateTime registeredAt;
 
-    @JsonFormat(pattern = "dd/MM/yyyy")
+    @JsonFormat(pattern = "dd/MM/yyyy HH:mm:ss")
     private LocalDateTime updatedAt;
 
     @Column(name = "current_price")
@@ -91,7 +91,7 @@ public class Material {
     @Override
     public String toString() {
         return "Descrição:" + description +
-                "/n Data do cadastro: " + registeredAt +
-                "/n Preço: " + priceHistories;
+                "\n Data do cadastro: " + registeredAt +
+                "\n Preço: " + priceHistories;
     }
 }

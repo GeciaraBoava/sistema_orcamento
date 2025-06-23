@@ -24,7 +24,7 @@ public class UnitMeasureService {
     }
 
     public UnitMeasureResponseDTO save(UnitMeasureRequestDTO dto) {
-        UnitMeasure unitMeasure = unitMeasureMapper.toUnitMeasureEntity(dto);
+        UnitMeasure unitMeasure = unitMeasureMapper.toEntity(dto);
         unitMeasure = unitMeasureRepository.save(unitMeasure);
         return unitMeasureMapper.toResponseDTO(unitMeasure);
     }
@@ -42,10 +42,15 @@ public class UnitMeasureService {
         return unitMeasureMapper.toResponseDTO(unitMeasure);
     }
 
+    public UnitMeasure findUnitMeasureById(Long id) {
+        return unitMeasureRepository.findById(id)
+                .orElseThrow(ItemNotFoundException::new);
+    }
+
     public UnitMeasureResponseDTO update(Long id, UnitMeasureUpdateRequestDTO dto) {
         UnitMeasure unitMeasure = unitMeasureRepository.findById(id)
                 .orElseThrow(ItemNotFoundException::new);
-        UnitMeasure updatedUnitMeasure = unitMeasureMapper.updateEntityFromDTO(dto, unitMeasure);
+        UnitMeasure updatedUnitMeasure = unitMeasureMapper.updateFromDTO(dto, unitMeasure);
         unitMeasureRepository.save(updatedUnitMeasure);
         return unitMeasureMapper.toResponseDTO(updatedUnitMeasure);
     }

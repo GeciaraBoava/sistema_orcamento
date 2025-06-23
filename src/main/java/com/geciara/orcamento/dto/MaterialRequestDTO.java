@@ -11,13 +11,13 @@ public class MaterialRequestDTO {
     @NotBlank(message = "Nome é obrigatório")
     private String description;
 
-    @NotNull(message = "Tipo de material é obrigatório")
+    @NotBlank(message = "Tipo de material é obrigatório")
     private String materialTypeDescription;
 
-    @NotNull(message = "Unidade de medida é obrigatório")
+    @NotBlank(message = "Unidade de medida é obrigatório")
     private String unitMeasureDescription;
 
-    @NotBlank(message = "Preço atual é obrigatório")
+    @NotNull(message = "Preço atual é obrigatório")
     private BigDecimal currentPrice;
 
 }

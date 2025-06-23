@@ -1,15 +1,15 @@
-package com.geciara.orcamento.model.entitys;
+package com.geciara.orcamento.model.entitys.materialDetails;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.geciara.orcamento.model.entitys.Material;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
-@Data
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
@@ -28,14 +28,6 @@ public class PriceHistory {
     @Column(nullable = false, precision = 10, scale = 2)
     private BigDecimal price;
 
-    @JsonFormat(pattern = "dd/MM/yyyy")
+    @JsonFormat(pattern = "dd/MM/yyyy HH:mm:ss")
     private LocalDateTime registeredAt;
-
-    public PriceHistory(
-           Material material, BigDecimal price) {
-
-        this.material = material;
-        this.price = price;
-
-    }
 }

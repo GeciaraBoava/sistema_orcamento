@@ -24,7 +24,7 @@ public class MaterialService {
     }
 
     public MaterialResponseDTO save(MaterialRequestDTO dto) {
-        Material material = materialMapper.toMaterialEntity(dto);
+        Material material = materialMapper.toEntity(dto);
         material = materialRepository.save(material);
         return materialMapper.toResponseDTO(material);
     }
@@ -42,10 +42,15 @@ public class MaterialService {
         return materialMapper.toResponseDTO(material);
     }
 
+    public Material findMaterialById(Long id) {
+        return materialRepository.findById(id)
+                .orElseThrow(ItemNotFoundException::new);
+    }
+
     public MaterialResponseDTO update(Long id, MaterialUpdateRequestDTO dto) {
         Material material = materialRepository.findById(id)
                 .orElseThrow(ItemNotFoundException::new);
-        Material updatedMaterial = materialMapper.updateEntityFromDTO(dto, material);
+        Material updatedMaterial = materialMapper.updateFromDTO(dto, material);
         materialRepository.save(updatedMaterial);
         return materialMapper.toResponseDTO(updatedMaterial);
     }

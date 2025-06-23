@@ -3,13 +3,7 @@ package com.geciara.orcamento.model.entitys;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.geciara.orcamento.model.enums.UserRole;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-<<<<<<< HEAD
-=======
-import lombok.EqualsAndHashCode;
->>>>>>> 7fafd5efd6d2e5915f0fa6fd103be68ee248bae4
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -19,17 +13,13 @@ import java.util.Collection;
 import java.util.List;
 
 
-@Data
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity(name = "users")
 @Table(name = "users")
-<<<<<<< HEAD
 public class User implements UserDetails {
-=======
-@EqualsAndHashCode(callSuper = true)
-public class User extends GenericEntitys implements UserDetails {
->>>>>>> 7fafd5efd6d2e5915f0fa6fd103be68ee248bae4
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "users_seq")
@@ -37,7 +27,7 @@ public class User extends GenericEntitys implements UserDetails {
     private Long id;
 
     @Column(nullable = false)
-    private String login;
+    private String username;
 
     @Column(nullable = false)
     private String password;
@@ -46,66 +36,30 @@ public class User extends GenericEntitys implements UserDetails {
     @Column(nullable = false)
     private UserRole role;
 
-<<<<<<< HEAD
-    @Column(unique = true, nullable = false)
-    protected String name;
+    @Embedded
+    private Register register;
 
     @Column(nullable = false)
-    protected String phone;
+    private boolean isActive;
 
-    @Column(nullable = false)
-    protected String email;
-
-    @Column(nullable = false)
-    protected String address;
-
-    @Column(nullable = false)
-    protected String city;
-
-    @Column(nullable = false)
-    protected String state;
-
-    @Column(nullable = false)
-    protected boolean isActive;
-
-=======
->>>>>>> 7fafd5efd6d2e5915f0fa6fd103be68ee248bae4
-    @JsonFormat(pattern = "dd/MM/yyyy")
+    @JsonFormat(pattern = "dd/MM/yyyy HH:mm:ss")
     @Column(nullable = false, updatable = false)
-    protected LocalDateTime registeredAt;
+    private LocalDateTime registeredAt;
 
-    @JsonFormat(pattern = "dd/MM/yyyy")
-    protected LocalDateTime updatedAt;
+    @JsonFormat(pattern = "dd/MM/yyyy HH:mm:ss")
+    private LocalDateTime updatedAt;
 
-<<<<<<< HEAD
-=======
-    public User(String name,
-                String login,
-                String phone,
-                String email,
-                String address,
-                String city,
-                String state,
-                String password,
-                UserRole role) {
-        super(name, phone, email, address, city, state);
-        this.login = login;
-        this.password = password;
-        this.role = role;
-    }
-
->>>>>>> 7fafd5efd6d2e5915f0fa6fd103be68ee248bae4
     @Override
     public String toString() {
-        return "Nome: " + name +
-                "/nLogin: " + login +
-                "/nTipo de acesso: " + role +
-                "/nTelefone: " +  phone +
-                "/nE-mail: " + email +
-                "/nEndereço: " + address + ", " + city + "/" + state +
-                "/nSituação: " + isActive +
-                "/nData de criação:  " + registeredAt +
-                "/nData de alteração" + updatedAt;
+        return "Nome: " + getRegister().getName() +
+                "\nLogin: " + username +
+                "\nTipo de acesso: " + role +
+                "\nTelefone: " +  getRegister().getPhone() +
+                "\nE-mail: " + getRegister().getEmail() +
+                "\nEndereço: " + getRegister().getAddress() + ", " + getRegister().getCity() + "/" + getRegister().getUf() +
+                "\nSituação: " + isActive +
+                "\nData de criação:  " + registeredAt +
+                "\nData de alteração" + updatedAt;
     }
 
     //CONFIGURAÇÕES DE SEGURANÇA'
@@ -131,7 +85,7 @@ public class User extends GenericEntitys implements UserDetails {
 
     @Override
     public String getUsername() {
-        return login;
+        return username;
     }
 
     @Override

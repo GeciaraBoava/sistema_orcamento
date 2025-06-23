@@ -34,7 +34,7 @@ public class SecurityConfig {
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/api/users/**").hasAuthority("ROLE_ADMIN")
-                        .requestMatchers("/auth/login").permitAll()
+                        .requestMatchers("/login", "/auth/login", "/img/**", "/css/**", "/js/**").permitAll()
                         .requestMatchers("/v3/api-docs/**", "/swagger-ui/**", "/swagger-ui.html").permitAll()
                         .anyRequest().authenticated()
                 )
@@ -50,11 +50,7 @@ public class SecurityConfig {
     }
 
     @Bean
-<<<<<<< HEAD
     public BCryptPasswordEncoder passwordEncoder() {
-=======
-    public PasswordEncoder passwordEncoder() {
->>>>>>> 7fafd5efd6d2e5915f0fa6fd103be68ee248bae4
         return new BCryptPasswordEncoder();
     }
 }

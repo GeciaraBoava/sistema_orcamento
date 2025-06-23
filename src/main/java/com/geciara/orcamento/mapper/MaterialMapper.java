@@ -6,7 +6,7 @@ import com.geciara.orcamento.dto.MaterialUpdateRequestDTO;
 import com.geciara.orcamento.exceptions.ItemNotFoundException;
 import com.geciara.orcamento.model.entitys.Material;
 import com.geciara.orcamento.model.entitys.MaterialType;
-import com.geciara.orcamento.model.entitys.PriceHistory;
+import com.geciara.orcamento.model.entitys.materialDetails.PriceHistory;
 import com.geciara.orcamento.model.entitys.UnitMeasure;
 import com.geciara.orcamento.repository.MaterialTypeRepository;
 import com.geciara.orcamento.repository.UnitMeasureRepository;
@@ -27,7 +27,9 @@ public class MaterialMapper {
     }
 
 
-    public Material toMaterialEntity(MaterialRequestDTO dto) {
+    public Material toEntity(MaterialRequestDTO dto) {
+
+        if (dto == null) return null;
 
         Material material = new Material();
 
@@ -55,8 +57,11 @@ public class MaterialMapper {
         return material;
     }
 
-    public Material updateEntityFromDTO(MaterialUpdateRequestDTO dto,
-                                    Material material) {
+    public Material updateFromDTO(MaterialUpdateRequestDTO dto,
+                                  Material material) {
+
+        if (dto == null) return null;
+
         if(dto.getDescription() != null) material.setDescription(dto.getDescription());
         if(dto.getIsActive() != null) material.setActive(dto.getIsActive());
         material.setUpdatedAt(LocalDateTime.now());

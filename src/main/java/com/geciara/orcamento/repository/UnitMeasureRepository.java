@@ -10,4 +10,6 @@ import java.util.Optional;
 public interface UnitMeasureRepository extends JpaRepository<UnitMeasure, Long> {
 
     Optional<UnitMeasure> findByDescription(String description);
+
+
 }

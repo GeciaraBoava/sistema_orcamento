@@ -10,17 +10,20 @@ import java.time.LocalDateTime;
 
 @Component
 public class CustomerMapper {
-    public Customer toCustomerEntity(CustomerRequestDTO dto) {
+
+    public Customer toEntity(CustomerRequestDTO dto) {
+
+        if (dto == null) return null;
 
         Customer customer = new Customer();
 
-        customer.setName(dto.getName());
-        customer.setPhone(dto.getPhone());
+        customer.getRegister().setName(dto.getName());
+        customer.getRegister().setPhone(dto.getPhone());
         customer.setContactName(dto.getContactName());
-        customer.setEmail(dto.getEmail());
-        customer.setAddress(dto.getAddress());
-        customer.setCity(dto.getCity());
-        customer.setState(dto.getState());
+        customer.getRegister().setEmail(dto.getEmail());
+        customer.getRegister().setAddress(dto.getAddress());
+        customer.getRegister().setCity(dto.getCity());
+        customer.getRegister().setUf(dto.getState());
         customer.setCustomerType(dto.getCustomerType());
         customer.setRegisteredAt(LocalDateTime.now());
         customer.setActive(true);
@@ -28,15 +31,18 @@ public class CustomerMapper {
         return customer;
     }
 
-    public Customer updateEntityFromDTO(CustomerUpdateRequestDTO dto,
-                                    Customer customer) {
-        if(dto.getName() != null) customer.setName(dto.getName());
-        if(dto.getPhone() != null) customer.setPhone(dto.getPhone());
+    public Customer updateFromDTO(CustomerUpdateRequestDTO dto,
+                                  Customer customer) {
+
+        if (dto == null) return null;
+
+        if(dto.getName() != null) customer.getRegister().setName(dto.getName());
+        if(dto.getPhone() != null) customer.getRegister().setPhone(dto.getPhone());
         if(dto.getContactName() != null) customer.setContactName(dto.getContactName());
-        if(dto.getEmail() != null) customer.setEmail(dto.getEmail());
-        if(dto.getAddress() != null) customer.setAddress(dto.getAddress());
-        if(dto.getCity() != null) customer.setCity(dto.getCity());
-        if(dto.getState() != null) customer.setState(dto.getState());
+        if(dto.getEmail() != null) customer.getRegister().setEmail(dto.getEmail());
+        if(dto.getAddress() != null) customer.getRegister().setAddress(dto.getAddress());
+        if(dto.getCity() != null) customer.getRegister().setCity(dto.getCity());
+        if(dto.getState() != null) customer.getRegister().setUf(dto.getState());
         if(dto.getCustomerType() != null) customer.setCustomerType(dto.getCustomerType());
         if(dto.getIsActive() != null) customer.setActive(dto.getIsActive());
         customer.setUpdatedAt(LocalDateTime.now());
@@ -48,13 +54,13 @@ public class CustomerMapper {
         CustomerResponseDTO dto = new CustomerResponseDTO();
 
         dto.setId(customer.getId());
-        dto.setName(customer.getName());
-        dto.setPhone(customer.getPhone());
+        dto.setName(customer.getRegister().getName());
+        dto.setPhone(customer.getRegister().getPhone());
         dto.setContactName(customer.getContactName());
-        dto.setEmail(customer.getEmail());
-        dto.setAddress(customer.getAddress());
-        dto.setCity(customer.getCity());
-        dto.setState(customer.getState());
+        dto.setEmail(customer.getRegister().getEmail());
+        dto.setAddress(customer.getRegister().getAddress());
+        dto.setCity(customer.getRegister().getCity());
+        dto.setState(customer.getRegister().getUf());
         dto.setCustomerType(customer.getCustomerType());
         dto.setActive(customer.isActive());
         dto.setRegisteredAt(customer.getRegisteredAt());
