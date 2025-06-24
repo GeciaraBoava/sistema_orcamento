@@ -1,9 +1,9 @@
 package com.geciara.orcamento.controller;
 
-import com.geciara.orcamento.dto.ProductItemRequestDTO;
-import com.geciara.orcamento.dto.ProductItemResponseDTO;
-import com.geciara.orcamento.dto.ProductItemUpdateDTO;
-import com.geciara.orcamento.service.ProductItemService;
+import com.geciara.orcamento.dto.CompositionRequestDTO;
+import com.geciara.orcamento.dto.CompositionResponseDTO;
+import com.geciara.orcamento.dto.CompositionUpdateDTO;
+import com.geciara.orcamento.service.CompositionService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -19,17 +19,17 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/productItems")
 @Validated
-public class ProductItemController {
+public class CompositionController {
 
-    private final ProductItemService productItemService;
+    private final CompositionService compositionService;
 
-    public ProductItemController(ProductItemService productItemService) {
-        this.productItemService = productItemService;
+    public CompositionController(CompositionService compositionService) {
+        this.compositionService = compositionService;
     }
 
     @GetMapping
-    public ResponseEntity<List<ProductItemResponseDTO>> listAll() {
-        return ResponseEntity.ok(productItemService.listAll());
+    public ResponseEntity<List<CompositionResponseDTO>> listAll() {
+        return ResponseEntity.ok(compositionService.listAll());
     }
 
     @Operation(summary = "Buscar item de produto por ID", description = "Recupera um item de produto pelo seu ID")
@@ -37,25 +37,25 @@ public class ProductItemController {
     @ApiResponse(responseCode = "403", description = "Acesso negado")
     @ApiResponse(responseCode = "404", description = "Item de Produto não encontrado")
     @GetMapping("/{id}")
-    public ResponseEntity<ProductItemResponseDTO> findById(@PathVariable Long id) {
-        return ResponseEntity.ok(productItemService.findById(id));
+    public ResponseEntity<CompositionResponseDTO> findById(@PathVariable Long id) {
+        return ResponseEntity.ok(compositionService.findById(id));
     }
 
     @PostMapping
-    public ResponseEntity<ProductItemResponseDTO> save(@RequestBody @Valid ProductItemRequestDTO entity) {
-        ProductItemResponseDTO savedEntity = productItemService.save(entity);
+    public ResponseEntity<CompositionResponseDTO> save(@RequestBody @Valid CompositionRequestDTO entity) {
+        CompositionResponseDTO savedEntity = compositionService.save(entity);
         return ResponseEntity.status(HttpStatus.CREATED).body(savedEntity);
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
-        productItemService.delete(id);
+        compositionService.delete(id);
         return ResponseEntity.noContent().build();
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<ProductItemResponseDTO> update(@PathVariable Long id,@RequestBody @Valid ProductItemUpdateDTO entity) {
-        ProductItemResponseDTO updatedEntity = productItemService.update(id, entity);
+    public ResponseEntity<CompositionResponseDTO> update(@PathVariable Long id, @RequestBody @Valid CompositionUpdateDTO entity) {
+        CompositionResponseDTO updatedEntity = compositionService.update(id, entity);
         return ResponseEntity.ok(updatedEntity);
 
     }

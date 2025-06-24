@@ -13,11 +13,17 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class UserUpdateRequestDTO {
 
+    @NotNull
+    private Long id;
+
     private String name;
+
+    @JsonIgnore
     private String login;
 
     @JsonIgnore
     private String password;
+
     private String phone;
 
     @Email(message = "Email inválido")

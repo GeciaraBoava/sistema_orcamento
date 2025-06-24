@@ -2,16 +2,12 @@ package com.geciara.orcamento.service;
 
 import com.geciara.orcamento.dto.*;
 import com.geciara.orcamento.exceptions.ItemNotFoundException;
-import com.geciara.orcamento.mapper.ItemTypeMapper;
-import com.geciara.orcamento.mapper.ProductItemMapper;
 import com.geciara.orcamento.mapper.ProductMapper;
 import com.geciara.orcamento.model.entitys.*;
-import com.geciara.orcamento.repository.ProductItemRepository;
 import com.geciara.orcamento.repository.ProductRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 
 @Service
@@ -21,31 +17,31 @@ public class ProductService {
     private final ProductMapper productMapper;
     private final MaterialTypeService materialTypeService;
     private final UnitMeasureService unitMeasureService;
-    private final ProductItemService productItemService;
+    private final CompositionService compositionService;
 
     public ProductService(
             ProductRepository productRepository,
             ProductMapper productMapper,
             MaterialTypeService materialTypeService,
             UnitMeasureService unitMeasureService,
-            ProductItemService productItemService
+            CompositionService compositionService
     ) {
         this.productRepository = productRepository;
         this.productMapper = productMapper;
         this.materialTypeService = materialTypeService;
         this.unitMeasureService = unitMeasureService;
-        this.productItemService = productItemService;
+        this.compositionService = compositionService;
     }
 
     public ProductResponseDTO save(ProductRequestDTO dto) {
         MaterialType materialType = materialTypeService.findMaterialTypeById(dto.getMaterialTypeId());
         UnitMeasure unitMeasure = unitMeasureService.findUnitMeasureById(dto.getUnitMeasureId());
-        List<ProductItem> productItemList = dto.getProductItemIds()
+        List<Composition> compositionList = dto.getCompositionsIds()
                 .stream()
-                .map(productItemService::findProductItemById)
+                .map(compositionService::findProductItemById)
                 .toList();
 
-        Product product = productMapper.toEntity(dto,materialType, unitMeasure, productItemList);
+        Product product = productMapper.toEntity(dto,materialType, unitMeasure, compositionList);
         product = productRepository.save(product);
 
         return productMapper.toResponseDTO(product);
@@ -72,14 +68,14 @@ public class ProductService {
     public ProductResponseDTO update(Long id, ProductUpdateDTO dto) {
         MaterialType materialType = materialTypeService.findMaterialTypeById(dto.getMaterialTypeId());
         UnitMeasure unitMeasure = unitMeasureService.findUnitMeasureById(dto.getUnitMeasureId());
-        List<ProductItem> productItemList = dto.getProductItemIds()
+        List<Composition> compositionList = dto.getProductItemIds()
                 .stream()
-                .map(productItemService::findProductItemById)
+                .map(compositionService::findProductItemById)
                 .toList();
 
         Product product = productRepository.findById(id)
                 .orElseThrow(ItemNotFoundException::new);
-        Product updatedProduct = productMapper.updateFromDTO(dto, product, materialType, unitMeasure, productItemList);
+        Product updatedProduct = productMapper.updateFromDTO(dto, product, materialType, unitMeasure, compositionList);
         productRepository.save(updatedProduct);
         return productMapper.toResponseDTO(updatedProduct);
     }

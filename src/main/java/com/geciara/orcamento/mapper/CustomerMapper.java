@@ -42,7 +42,7 @@ public class CustomerMapper {
         if(dto.getEmail() != null) customer.getRegister().setEmail(dto.getEmail());
         if(dto.getAddress() != null) customer.getRegister().setAddress(dto.getAddress());
         if(dto.getCity() != null) customer.getRegister().setCity(dto.getCity());
-        if(dto.getState() != null) customer.getRegister().setUf(dto.getState());
+        if(dto.getUf() != null) customer.getRegister().setUf(dto.getUf());
         if(dto.getCustomerType() != null) customer.setCustomerType(dto.getCustomerType());
         if(dto.getIsActive() != null) customer.setActive(dto.getIsActive());
         customer.setUpdatedAt(LocalDateTime.now());

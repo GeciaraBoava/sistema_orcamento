@@ -33,9 +33,23 @@ public class SecurityConfig {
                 //política de criação de sessão no modo stateless (via 'token')
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/api/users/**").hasAuthority("ROLE_ADMIN")
+                        // Público
                         .requestMatchers("/login", "/auth/login", "/img/**", "/css/**", "/js/**").permitAll()
                         .requestMatchers("/v3/api-docs/**", "/swagger-ui/**", "/swagger-ui.html").permitAll()
+
+                        // Apenas ADMIN
+                        .requestMatchers("/config/**", "/admin/**").hasAnyAuthority("ROLE_ADMIN")
+
+                        // Apenas MANAGER e ADMIN
+                        .requestMatchers("/api/users/**").hasAnyAuthority("ROLE_MANAGER", "ROLE_ADMIN")
+
+                        // BUDGET, MANAGER e ADMIN → CRUD de orçamentos, produtos, insumos
+                        .requestMatchers("/budgets/**", "/products/**", "/items/**", "/materials/**").hasAnyAuthority("ROLE_BUDGET", "ROLE_MANAGER", "ROLE_ADMIN")
+
+                        // COMMERCIAL pode visualizar orçamentos (ex: páginas de consulta/impressão)
+                        .requestMatchers(HttpMethod.GET, "/budgets/**", "/products/**").hasAnyAuthority("ROLE_COMMERCIAL", "ROLE_BUDGET", "ROLE_MANAGER", "ROLE_ADMIN")
+
+                        // Demais requisições → autenticadas
                         .anyRequest().authenticated()
                 )
                 //chama o filtro de sergurança antes da autenticação do username

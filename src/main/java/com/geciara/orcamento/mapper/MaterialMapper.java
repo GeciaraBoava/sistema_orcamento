@@ -2,7 +2,7 @@ package com.geciara.orcamento.mapper;
 
 import com.geciara.orcamento.dto.MaterialRequestDTO;
 import com.geciara.orcamento.dto.MaterialResponseDTO;
-import com.geciara.orcamento.dto.MaterialUpdateRequestDTO;
+import com.geciara.orcamento.dto.MaterialUpdateDTO;
 import com.geciara.orcamento.exceptions.ItemNotFoundException;
 import com.geciara.orcamento.model.entitys.Material;
 import com.geciara.orcamento.model.entitys.MaterialType;
@@ -57,7 +57,7 @@ public class MaterialMapper {
         return material;
     }
 
-    public Material updateFromDTO(MaterialUpdateRequestDTO dto,
+    public Material updateFromDTO(MaterialUpdateDTO dto,
                                   Material material) {
 
         if (dto == null) return null;

@@ -2,7 +2,7 @@ package com.geciara.orcamento.controller;
 
 import com.geciara.orcamento.dto.SupplierRequestDTO;
 import com.geciara.orcamento.dto.SupplierResponseDTO;
-import com.geciara.orcamento.dto.SupplierUpdateRequestDTO;
+import com.geciara.orcamento.dto.SupplierUpdateDTO;
 import com.geciara.orcamento.service.SupplierService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -54,7 +54,7 @@ public class SupplierController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<SupplierResponseDTO> update(@PathVariable Long id, @RequestBody @Valid SupplierUpdateRequestDTO entity) {
+    public ResponseEntity<SupplierResponseDTO> update(@PathVariable Long id, @RequestBody @Valid SupplierUpdateDTO entity) {
         SupplierResponseDTO updatedEntity = supplierService.update(id, entity);
         return ResponseEntity.ok(updatedEntity);
 

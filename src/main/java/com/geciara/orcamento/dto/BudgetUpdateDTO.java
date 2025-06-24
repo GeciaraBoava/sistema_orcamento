@@ -4,6 +4,7 @@ import com.geciara.orcamento.model.entitys.budgetDetails.Freight;
 import com.geciara.orcamento.model.entitys.budgetDetails.Installation;
 import com.geciara.orcamento.model.entitys.budgetDetails.Management;
 import com.geciara.orcamento.model.entitys.budgetDetails.Taxes;
+import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -14,6 +15,9 @@ import java.util.List;
 @Getter
 @Setter
 public class BudgetUpdateDTO {
+
+    @NotNull
+    private Long id;
 
     private LocalDate date;
     private LocalDate dateReference;

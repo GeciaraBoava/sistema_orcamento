@@ -2,7 +2,7 @@ package com.geciara.orcamento.mapper;
 
 import com.geciara.orcamento.dto.SupplierRequestDTO;
 import com.geciara.orcamento.dto.SupplierResponseDTO;
-import com.geciara.orcamento.dto.SupplierUpdateRequestDTO;
+import com.geciara.orcamento.dto.SupplierUpdateDTO;
 import com.geciara.orcamento.model.entitys.Supplier;
 import org.springframework.stereotype.Component;
 
@@ -29,7 +29,7 @@ public class SupplierMapper {
         return supplier;
     }
 
-    public Supplier updateFromDTO(SupplierUpdateRequestDTO dto,
+    public Supplier updateFromDTO(SupplierUpdateDTO dto,
                                   Supplier supplier) {
 
         if (dto == null) return null;

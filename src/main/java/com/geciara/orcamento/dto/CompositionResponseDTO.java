@@ -1,14 +1,17 @@
 package com.geciara.orcamento.dto;
 
+import com.geciara.orcamento.model.entitys.MaterialComposition;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.Map;
 
 @Getter
 @Setter
-public class ProductItemResponseDTO {
+public class CompositionResponseDTO {
 
     private Long id;
     private String description;
@@ -16,8 +19,7 @@ public class ProductItemResponseDTO {
     private UnitMeasureResponseDTO unitMeasure;
     private LocalDateTime registeredAt;
     private LocalDateTime updatedAt;
-    private MaterialResponseDTO material;
-    private Integer quantity;
+    private List<MaterialComposition> materialComposition;
     private BigDecimal cost;
 
 }

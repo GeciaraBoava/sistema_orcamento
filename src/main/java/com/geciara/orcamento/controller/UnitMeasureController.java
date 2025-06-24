@@ -2,7 +2,7 @@ package com.geciara.orcamento.controller;
 
 import com.geciara.orcamento.dto.UnitMeasureRequestDTO;
 import com.geciara.orcamento.dto.UnitMeasureResponseDTO;
-import com.geciara.orcamento.dto.UnitMeasureUpdateRequestDTO;
+import com.geciara.orcamento.dto.UnitMeasureUpdateDTO;
 import com.geciara.orcamento.service.UnitMeasureService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -54,7 +54,7 @@ public class UnitMeasureController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<UnitMeasureResponseDTO> update(@PathVariable Long id, @RequestBody @Valid UnitMeasureUpdateRequestDTO entity) {
+    public ResponseEntity<UnitMeasureResponseDTO> update(@PathVariable Long id, @RequestBody @Valid UnitMeasureUpdateDTO entity) {
         UnitMeasureResponseDTO updatedEntity = unitMeasureService.update(id, entity);
         return ResponseEntity.ok(updatedEntity);
 

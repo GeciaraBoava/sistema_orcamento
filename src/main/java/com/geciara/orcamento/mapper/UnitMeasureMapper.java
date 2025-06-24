@@ -2,7 +2,7 @@ package com.geciara.orcamento.mapper;
 
 import com.geciara.orcamento.dto.UnitMeasureRequestDTO;
 import com.geciara.orcamento.dto.UnitMeasureResponseDTO;
-import com.geciara.orcamento.dto.UnitMeasureUpdateRequestDTO;
+import com.geciara.orcamento.dto.UnitMeasureUpdateDTO;
 import com.geciara.orcamento.model.entitys.UnitMeasure;
 import org.springframework.stereotype.Component;
 
@@ -24,7 +24,7 @@ public class UnitMeasureMapper {
         return unitMeasure;
     }
 
-    public UnitMeasure updateFromDTO(UnitMeasureUpdateRequestDTO dto,
+    public UnitMeasure updateFromDTO(UnitMeasureUpdateDTO dto,
                                      UnitMeasure unitMeasure) {
 
         if (dto == null) return null;

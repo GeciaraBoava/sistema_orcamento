@@ -2,7 +2,7 @@ package com.geciara.orcamento.controller;
 
 import com.geciara.orcamento.dto.MaterialTypeRequestDTO;
 import com.geciara.orcamento.dto.MaterialTypeResponseDTO;
-import com.geciara.orcamento.dto.MaterialTypeUpdateRequestDTO;
+import com.geciara.orcamento.dto.MaterialTypeUpdateDTO;
 import com.geciara.orcamento.service.MaterialTypeService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -52,7 +52,7 @@ public class MaterialTypeController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<MaterialTypeResponseDTO> update(@PathVariable Long id, @RequestBody @Valid MaterialTypeUpdateRequestDTO entity) {
+    public ResponseEntity<MaterialTypeResponseDTO> update(@PathVariable Long id, @RequestBody @Valid MaterialTypeUpdateDTO entity) {
         MaterialTypeResponseDTO updatedEntity = materialTypeService.update(id, entity);
         return ResponseEntity.ok(updatedEntity);
 

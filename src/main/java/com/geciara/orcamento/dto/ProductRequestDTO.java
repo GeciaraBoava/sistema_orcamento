@@ -6,7 +6,6 @@ import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -30,9 +29,6 @@ public class ProductRequestDTO {
     private LocalDate referenceDate;
 
     @NotEmpty(message = "Item de orçamento é obrigatório")
-    private List<Long> productItemIds;
-
-    @NotNull(message = "Valor de custo é obrigatório")
-    private BigDecimal cost;
+    private List<Long> compositionsIds;
 
 }

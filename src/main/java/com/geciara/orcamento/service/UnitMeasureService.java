@@ -2,7 +2,7 @@ package com.geciara.orcamento.service;
 
 import com.geciara.orcamento.dto.UnitMeasureRequestDTO;
 import com.geciara.orcamento.dto.UnitMeasureResponseDTO;
-import com.geciara.orcamento.dto.UnitMeasureUpdateRequestDTO;
+import com.geciara.orcamento.dto.UnitMeasureUpdateDTO;
 import com.geciara.orcamento.exceptions.ItemNotFoundException;
 import com.geciara.orcamento.mapper.UnitMeasureMapper;
 import com.geciara.orcamento.model.entitys.UnitMeasure;
@@ -47,7 +47,7 @@ public class UnitMeasureService {
                 .orElseThrow(ItemNotFoundException::new);
     }
 
-    public UnitMeasureResponseDTO update(Long id, UnitMeasureUpdateRequestDTO dto) {
+    public UnitMeasureResponseDTO update(Long id, UnitMeasureUpdateDTO dto) {
         UnitMeasure unitMeasure = unitMeasureRepository.findById(id)
                 .orElseThrow(ItemNotFoundException::new);
         UnitMeasure updatedUnitMeasure = unitMeasureMapper.updateFromDTO(dto, unitMeasure);

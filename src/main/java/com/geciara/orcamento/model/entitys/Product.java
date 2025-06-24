@@ -44,7 +44,7 @@ public class Product {
     private LocalDate referenceDate;
 
     @Column(name = "itens_orcamento_list", nullable = false)
-    private List<ProductItem> productItemList;
+    private List<Composition> compositionList;
 
     @Column(nullable = false)
     private BigDecimal cost;

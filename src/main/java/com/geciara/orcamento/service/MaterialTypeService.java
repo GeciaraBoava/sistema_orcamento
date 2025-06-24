@@ -2,7 +2,7 @@ package com.geciara.orcamento.service;
 
 import com.geciara.orcamento.dto.MaterialTypeRequestDTO;
 import com.geciara.orcamento.dto.MaterialTypeResponseDTO;
-import com.geciara.orcamento.dto.MaterialTypeUpdateRequestDTO;
+import com.geciara.orcamento.dto.MaterialTypeUpdateDTO;
 import com.geciara.orcamento.exceptions.ItemNotFoundException;
 import com.geciara.orcamento.mapper.MaterialTypeMapper;
 import com.geciara.orcamento.model.entitys.MaterialType;
@@ -46,7 +46,7 @@ public class MaterialTypeService {
                 .orElseThrow(ItemNotFoundException::new);
     }
 
-    public MaterialTypeResponseDTO update(Long id, MaterialTypeUpdateRequestDTO dto) {
+    public MaterialTypeResponseDTO update(Long id, MaterialTypeUpdateDTO dto) {
         MaterialType materialType = materialTypeRepository.findById(id)
                 .orElseThrow(ItemNotFoundException::new);
         MaterialType updatedMaterialType = materialTypeMapper.updateFromDTO(dto, materialType);

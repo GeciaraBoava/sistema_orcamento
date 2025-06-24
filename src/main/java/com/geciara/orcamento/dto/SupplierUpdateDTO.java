@@ -1,14 +1,14 @@
 package com.geciara.orcamento.dto;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.geciara.orcamento.model.enums.CustomerType;
 import jakarta.validation.constraints.*;
 import lombok.Data;
 
-import java.time.LocalDateTime;
-
 @Data
-public class SupplierUpdateRequestDTO {
+public class SupplierUpdateDTO {
+
+    @NotNull
+    private Long id;
 
     private String name;
     private String phone;

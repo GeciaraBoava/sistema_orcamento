@@ -20,7 +20,7 @@ public class ProductResponseDTO {
     private LocalDateTime updatedAt;
     private LocalDate date;
     private LocalDate referenceDate;
-    private List<ProductItemResponseDTO> productItemResponseDTOS;
+    private List<CompositionResponseDTO> compositionResponseDTOS;
     private BigDecimal cost;
 
 }

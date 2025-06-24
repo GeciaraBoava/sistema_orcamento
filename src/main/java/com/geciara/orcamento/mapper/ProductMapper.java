@@ -1,7 +1,7 @@
 package com.geciara.orcamento.mapper;
 
 import com.geciara.orcamento.dto.*;
-import com.geciara.orcamento.model.entitys.ProductItem;
+import com.geciara.orcamento.model.entitys.Composition;
 import com.geciara.orcamento.model.entitys.MaterialType;
 import com.geciara.orcamento.model.entitys.Product;
 import com.geciara.orcamento.model.entitys.UnitMeasure;
@@ -19,19 +19,19 @@ public class ProductMapper {
 
     private final MaterialTypeMapper materialTypeMapper;
     private final UnitMeasureMapper unitMeasureMapper;
-    private final ProductItemMapper productItemMapper;
+    private final CompositionMapper compositionMapper;
 
-    public ProductMapper(MaterialTypeMapper materialTypeMapper, UnitMeasureMapper unitMeasureMapper, ProductItemMapper productItemMapper) {
+    public ProductMapper(MaterialTypeMapper materialTypeMapper, UnitMeasureMapper unitMeasureMapper, CompositionMapper compositionMapper) {
         this.materialTypeMapper = materialTypeMapper;
         this.unitMeasureMapper = unitMeasureMapper;
-        this.productItemMapper = productItemMapper;
+        this.compositionMapper = compositionMapper;
     }
 
     public Product toEntity(
             ProductRequestDTO dto,
             MaterialType materialType,
             UnitMeasure unitMeasure,
-            List<ProductItem> productItemList
+            List<Composition> compositionList
     ) {
 
         if (dto == null) return null;
@@ -43,8 +43,7 @@ public class ProductMapper {
         product.setUnitMeasure(unitMeasure);
         product.setDate(dto.getDate());
         product.setReferenceDate(dto.getReferenceDate());
-        product.setProductItemList(productItemList);
-        product.setCost(dto.getCost());
+        product.setCompositionList(compositionList);
 
         return product;
     }
@@ -54,7 +53,7 @@ public class ProductMapper {
             Product product,
             MaterialType materialType,
             UnitMeasure unitMeasure,
-            List<ProductItem> productItemList
+            List<Composition> compositionList
     ) {
         if (dto == null) return null;
 
@@ -63,7 +62,7 @@ public class ProductMapper {
         product.setUnitMeasure(unitMeasure);
         product.setDate(dto.getDate());
         product.setReferenceDate(dto.getReferenceDate());
-        product.setProductItemList(productItemList);
+        product.setCompositionList(compositionList);
         product.setCost(dto.getCost());
 
         return product;
@@ -82,10 +81,10 @@ public class ProductMapper {
         dto.setUpdatedAt(product.getUpdatedAt());
         dto.setDate(product.getDate());
         dto.setReferenceDate(product.getReferenceDate());
-        dto.setProductItemResponseDTOS(
-                product.getProductItemList()
+        dto.setCompositionResponseDTOS(
+                product.getCompositionList()
                         .stream()
-                        .map(productItemMapper::toResponseDTO)
+                        .map(compositionMapper::toResponseDTO)
                         .collect(Collectors.toList()));
         dto.setCost(product.getCost());
 

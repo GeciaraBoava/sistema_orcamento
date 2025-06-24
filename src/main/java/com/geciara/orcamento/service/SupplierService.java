@@ -2,7 +2,7 @@ package com.geciara.orcamento.service;
 
 import com.geciara.orcamento.dto.SupplierRequestDTO;
 import com.geciara.orcamento.dto.SupplierResponseDTO;
-import com.geciara.orcamento.dto.SupplierUpdateRequestDTO;
+import com.geciara.orcamento.dto.SupplierUpdateDTO;
 import com.geciara.orcamento.exceptions.ItemNotFoundException;
 import com.geciara.orcamento.mapper.SupplierMapper;
 import com.geciara.orcamento.model.entitys.Supplier;
@@ -43,7 +43,7 @@ public class SupplierService {
         return supplierMapper.toResponseDTO(supplier);
     }
 
-    public SupplierResponseDTO update(Long id, SupplierUpdateRequestDTO dto) {
+    public SupplierResponseDTO update(Long id, SupplierUpdateDTO dto) {
         Supplier supplier = supplierRepository.findById(id)
                 .orElseThrow(ItemNotFoundException::new);
         Supplier updatedSupplier = supplierMapper.updateFromDTO(dto, supplier);

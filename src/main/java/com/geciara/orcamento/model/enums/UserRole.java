@@ -5,9 +5,10 @@ import org.springframework.security.core.GrantedAuthority;
 
 @Getter
 public enum UserRole {
-    ADMIN("Administrador", "Acesso completo ao sistema"),
-    MANAGER("Gerente", "Pode gerenciar orçamentos e usuários"),
-    BUDGET("Orçamentista", "Pode cadastrar e editar insumos e orçamentos");
+    ADMIN("ROLE_ADMIN", "Acesso completo ao sistema"),
+    MANAGER("ROLE_MANAGER", "Pode gerenciar orçamentos e usuários"),
+    BUDGET("ROLE_BUDGET", "Pode cadastrar e editar insumos e orçamentos"),
+    COMMERCIAL("ROLE_COMMERCIAL", "Pode consultar e imprimir orçamentos");
 
     private final String role;
     private final String description;

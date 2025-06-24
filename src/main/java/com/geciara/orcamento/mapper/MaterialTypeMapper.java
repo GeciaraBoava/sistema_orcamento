@@ -2,7 +2,7 @@ package com.geciara.orcamento.mapper;
 
 import com.geciara.orcamento.dto.MaterialTypeRequestDTO;
 import com.geciara.orcamento.dto.MaterialTypeResponseDTO;
-import com.geciara.orcamento.dto.MaterialTypeUpdateRequestDTO;
+import com.geciara.orcamento.dto.MaterialTypeUpdateDTO;
 import com.geciara.orcamento.model.entitys.MaterialType;
 import org.springframework.stereotype.Component;
 
@@ -24,7 +24,7 @@ public class MaterialTypeMapper {
         return materialType;
     }
 
-    public MaterialType updateFromDTO(MaterialTypeUpdateRequestDTO dto,
+    public MaterialType updateFromDTO(MaterialTypeUpdateDTO dto,
                                       MaterialType materialType) {
 
         if (dto == null) return null;

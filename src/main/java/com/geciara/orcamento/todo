@@ -1,0 +1,17 @@
+TODO
+
+- Conferir anotações nas entityes
+    @AllArgsConstructor
+    @NoArgsConstructor
+    @Entity
+    @Table(name = "xxxx")
+
+- Conferir relações @OneToMany etc nas entityes
+- Calcular custo da composição com base nas quantidades e valores dos materiais (save e update)
+- Trocar 'state' por 'UF' em todos os locais
+
+
+OK Tela Login
+OK Menu lateral
+- Tela cadastro usuário
+...

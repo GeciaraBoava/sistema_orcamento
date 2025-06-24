@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "material_type")
+@Table(name = "item_type")
 public class ItemType {
 
     @Id
